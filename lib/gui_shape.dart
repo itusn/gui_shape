@@ -25,6 +25,7 @@ export 'shape/i_gui_shape.dart';
 export 'shape/gui_shape_polygon.dart';
 export 'shape/gui_shape_star.dart';
 export 'shape/gui_shape_custom.dart';
+export 'shape/gui_shape_polar.dart';
 
 // Shadow
 export 'gui/gui_shadow.dart';

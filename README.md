@@ -12,6 +12,7 @@ This library contains:
 - GUI Shapes
   - N-sided polygon clipper and border
   - N-point star clipper and border
+  - Polar graph-based clipper and border
   - Custom shape clipper and border
   - Generic clipper and border
 - Gradient
@@ -44,9 +45,11 @@ import 'package:gui_shape/gui_shape.dart';
 
 Samples show n-sided polygons using **GuiClipShape**, and **GuiShapeBorder** with straight, rounded, stretched, and rotated properties.  Shape of polygon is defined by **GuiShapePolygon**.
 
-<img src="doc/polygon3.png" width="216" height="384">
-<img src="doc/polygon5.png" width="216" height="384">
-<img src="doc/polygon6.png" width="216" height="384">
+<table><tr>
+<td><img src="doc/polygon3.png" width="216" height="384"></td>
+<td><img src="doc/polygon5.png" width="216" height="384"></td>
+<td><img src="doc/polygon6.png" width="216" height="384"></td>
+</tr></table>
 
 1) A 5-sided clip (pentagon shaped).
 
@@ -126,9 +129,11 @@ Samples show n-sided polygons using **GuiClipShape**, and **GuiShapeBorder** wit
 
 Samples show n-pointed stars using **GuiClipShape**, and **GuiShapeBorder** with straight, rounded, stretched, and rotated properties.  Shape of polygon is defined by **GuiShapeStar**.
 
-<img src="doc/star3.png" width="216" height="384">
-<img src="doc/star5.png" width="216" height="384">
-<img src="doc/star6.png" width="216" height="384">
+<table><tr>
+<td><img src="doc/star3.png" width="216" height="384"></td>
+<td><img src="doc/star5.png" width="216" height="384"></td>
+<td><img src="doc/star6.png" width="216" height="384"></td>
+</tr></table>
 
 1) A 5-pointed star clip.
 
@@ -204,13 +209,109 @@ Samples show n-pointed stars using **GuiClipShape**, and **GuiShapeBorder** with
 	)
 ````
 
+### Polar Shapes 
+
+Samples show polar shapes rendered by a function that sweeps 360 degrees (default).  Shape of a polar graph is defined by **GuiShapePolar** and may be used with **GuiClipShape** to clip a region, or **GuiShapeBorder** to create an outline.
+
+<table><tr>
+<td><img src="doc/polar3.png" width="216" height="384"></td>
+<td><img src="doc/polar4.png" width="216" height="384"></td>
+<td><img src="doc/polar9.png" width="216" height="384"></td>
+</tr></table>
+
+1) A user-defined polar function-based clip 
+
+```dart
+	GuiClipShape(
+		shape: GuiShapePolar(
+			formula: (GeoAngle angle) {
+				return 0.7 * cos(3 * angle.radian).abs() + 0.3;
+			}
+		),
+		child: Container(color: Colors.blue)
+	)
+````
+
+2) A user-defined polar function-based elevated button 
+
+```dart
+	ElevatedButton(
+		style: ElevatedButton.styleFrom(
+			shape: GuiShapePolar(
+				formula: (GeoAngle angle) {
+					return 0.7 * cos(3 * angle.radian).abs() + 0.3;
+				}
+			),
+		),
+		onPressed: () {},
+		child: const Icon(Icons.person, color: Colors.yellow),
+	)
+````
+
+3) A four-leaf clover polar shape clip region 
+
+```dart
+	GuiClipShape(
+		shape: GuiShapePolar(
+			formula: (GeoAngle angle) {
+				return 0.7 * cos(2 * angle.radian).abs() + 0.3;
+			},
+			sampling: 60,
+			polarBeginAngle: GeoAngle.zero.radian,		// default
+			polarEndAngle: GeoAngle.angle360.radian,	// default 
+			cornerRadius: 0,
+			startAngle: GeoAngle(degree: 45),
+			clockwise: true,
+			boxFit: BoxFit.none,
+		),
+		shadows: const [
+			GuiShadow(color: Colors.red, elevation: 1.0),
+			GuiShadow(color: Colors.grey, elevation: 4.0)
+		],
+		child: Container(
+			color: Colors.blue,
+			child: const Center(
+				child: Icon(Icons.person, color: Colors.white),
+			)
+		),
+	)
+````
+
+4) A four-leaf clover polar shape elevated button
+
+```dart
+	ElevatedButton(
+		style: ElevatedButton.styleFrom(
+			shape: GuiShapeBorder(
+				shape: GuiShapePolar(
+					formula: (GeoAngle angle) {
+						return 0.7 * cos(2 * angle.radian).abs() + 0.3;
+					},
+					sampling: 60,
+					cornerRadius: 0,
+					startAngle: GeoAngle.zero,
+					clockwise: true,
+					boxFit: BoxFit.fill,
+				),
+				side: const BorderSide(
+					color: Colors.purple,
+					width: 2.0
+				),
+			),
+		),
+		onPressed: () {},
+		child: const Icon(Icons.person, color: Colors.yellow),
+	)
+````
+
 ### Custom Polygon
 
 Samples show a custom polygon using **GuiClipShape**, and **GuiShapeBorder** with straight, rounded, stretched, and rotated properties.  Shape of polygon is defined by **GuiShapeCustom**.  Each point is defined by **GeoCoordinate2D**. 
 
-
-<img src="doc/custom5.png" width="216" height="384">
-<img src="doc/custom7.png" width="216" height="384">
+<table><tr>
+<td><img src="doc/custom5.png" width="216" height="384"></td>
+<td><img src="doc/custom7.png" width="216" height="384"></td>
+</tr></table>
 
 1) A custom shaped clip with rounded corners and fitted to container's dimensions.
 
@@ -361,6 +462,7 @@ Classes aid in clipping regions or creating borders based on a shape.
   * **GuiShapeBorder** - A stateless widget for creating an outlined border in a user-defined shape
   * **GuiShapePolygon** - A n-sided polygon shape
   * **GuiShapeStar** - A n-pointed star shape
+  * **GuiShapePolar** - A polar function-based shape
   * **GuiShapeCustom** - A custom shape defined by a list of coordinates
   * **IGuiShape** - A shape interface for implementing additional shapes.  Used by GuiClipShape and GuiShapeBorder.
 
@@ -380,4 +482,8 @@ Classes aid creating image buffers based on raw color pixel data.
 * List of classes
   * **GuiBitmapBuffer** - A class that prepares an image in BMP format, with BMP header populated.  The user can populate the bitmap image data and use the resulting array to either load the Image (via Image.memory(…)) or store the resulting BMP data into an I/O stream (ie. file, network, etc…
 
+ ## Issues
+ 
+ If you encounter any issues, please report them at [https://github.com/itusn/gui_shape/issues](https://github.com/itusn/gui_shape/issues).
+ 
  

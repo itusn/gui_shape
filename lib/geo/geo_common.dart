@@ -169,8 +169,12 @@ class GeoCoordinate2D extends GeoCoordinate {
 class GeoAngle {
 
   /// A static [GeoAngle] representing 0 degrees (0 radians).
-  static GeoAngle ZERO = GeoAngle(radian: 0);
-  static GeoAngle zero = GeoAngle(radian: 0);
+  static final GeoAngle ZERO = GeoAngle(degree: 0);
+  static final GeoAngle zero = GeoAngle(degree: 0);
+  /// A static [GeoAngle] representing 180 degrees
+  static final GeoAngle angle180 = GeoAngle(degree: 180);
+  /// a static [GeoAngle] representing 360 degrees
+  static final GeoAngle angle360 = GeoAngle(degree: 360);
 
   /// The angle in degrees.
   late final double degree;
@@ -289,15 +293,16 @@ class GeoEllipse {
 
   /// Get coordinate on an ellipse centered at [center] at an [angle] given in radians.
   /// If center is not specified, origin (0,0) is assumed.
-  GeoCoordinate2D coordinateByRadian(double angle,[GeoCoordinate2D? center]) {
+  /// Factor [factor] is multiplied with the amplitude at the angle to support polar charting
+  GeoCoordinate2D coordinateByRadian(double angle,[GeoCoordinate2D? center, double factor = 1.0]) {
     // calculate sin and cos of angle
     double sinr = sin(angle);
     double cosr = cos(angle);
     // calculate x and y positions in ellipse
     // x = +/- ( xradius * yradius * cos(angle) / sqrt( (yradius * cos(angle))^2 + (xradius * sin(angle))^2 )
     // y = +/- ( xradius * yradius * sin(angle) / sqrt( (yradius * cos(angle))^2 + (xradius * sin(angle))^2 )
-    double cx = (_xy * cosr) / sqrt(pow(yRadius * cosr,2) + pow(xRadius*sinr,2));
-    double cy = (_xy * sinr) / sqrt(pow(yRadius * cosr,2) + pow(xRadius*sinr,2));
+    double cx = factor * (_xy * cosr) / sqrt(pow(yRadius * cosr,2) + pow(xRadius*sinr,2));
+    double cy = factor * (_xy * sinr) / sqrt(pow(yRadius * cosr,2) + pow(xRadius*sinr,2));
     return center == null? GeoCoordinate2D(cx,cy) : GeoCoordinate2D(center.x + cx, center.y + cy);
   }
 

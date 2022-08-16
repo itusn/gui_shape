@@ -49,6 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // controls which demo is visible in scrollable view
   bool _showPolygons = true;
   bool _showStars = true;
+  bool _showPolar = true;
   bool _showCustomShapes = true;
   bool _showCustomGradient = true;
 
@@ -74,6 +75,14 @@ class _MyHomePageState extends State<MyHomePage> {
       // content.addAll(_drawStars(Size( mlen, mlen )));
       content.add(_caption("Stars in ($xlen,$ylen)"));
       content.addAll(_drawStars(Size( xlen, ylen )));
+    }
+
+    // add polygons
+    if (_showPolar) {
+      // content.add(_caption("Polar in ($mlen,$mlen)"));
+      // content.addAll(_drawPolar(Size( mlen, mlen )));
+      content.add(_caption("Polar in ($xlen,$ylen)"));
+      content.addAll(_drawPolar(Size( xlen, ylen )));
     }
 
     // add custom shape
@@ -113,6 +122,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () {
                   setState(() {
                     _showStars = !_showStars;
+                  });
+                }
+            ),
+            IconButton(
+                icon: Icon(Icons.circle_outlined, color: _showPolar? Colors.white : Colors.grey),
+                onPressed: () {
+                  setState(() {
+                    _showPolar = !_showPolar;
                   });
                 }
             ),
@@ -625,6 +642,271 @@ class _MyHomePageState extends State<MyHomePage> {
 
     ];
   }
+
+  List<Widget> _drawPolar(Size shapeSize) {
+    return <Widget>[
+      Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // R1-C1. Regular Polygon Clip
+            SizedBox(
+              height: shapeSize.height,
+              width: shapeSize.width,
+              child: GuiClipShape(
+                shape: GuiShapePolar(
+                  formula: (GeoAngle angle) {
+                    return 0.7 * cos(sides/3 * angle.radian).abs() + 0.3;
+                  },
+                  sampling: 60,
+                  polarBeginAngle: GeoAngle.zero.radian,
+                  polarEndAngle: GeoAngle.angle360.radian,
+                  cornerRadius: 0,
+                  startAngle: GeoAngle(degree: startAngle),
+                  clockwise: clockwise,
+                  boxFit: BoxFit.none,
+                ),
+                shadows: const [
+                  GuiShadow(color: Colors.red, elevation: 1.0),
+                  GuiShadow(color: Colors.grey, elevation: 4.0)
+                ],
+                child: Container(
+                    color: Colors.blue,
+                    child: const Center(
+                      child: Icon(Icons.person, color: Colors.white),
+                    )
+                ),
+              ),
+            ),
+            // R1-C2. Regular Polygon Border
+            SizedBox(
+              height: shapeSize.height,
+              width: shapeSize.width,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: GuiShapeBorder(
+                    shape: GuiShapePolar(
+                      formula: (GeoAngle angle) {
+                        return 0.7 * cos(sides/3 * angle.radian).abs() + 0.3;
+                      },
+                      sampling: 60,
+                      cornerRadius: 0,
+                      startAngle: GeoAngle(degree: startAngle),
+                      clockwise: clockwise,
+                      boxFit: BoxFit.none,
+                    ),
+                    side: const BorderSide(
+                        color: Colors.purple,
+                        width: 2.0),
+                  ),
+                ),
+                onPressed: () {},
+                child: const Icon(Icons.person, color: Colors.yellow),
+              ),
+            ),
+            // R1-C3. Fitted Polygon Border
+            SizedBox(
+              height: shapeSize.height,
+              width: shapeSize.width,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: GuiShapeBorder(
+                    shape: GuiShapePolar(
+                      formula: (GeoAngle angle) {
+                        return 0.7 * cos(sides/3 * angle.radian).abs() + 0.3;
+                      },
+                      sampling: 60,
+                      cornerRadius: 0,
+                      startAngle: GeoAngle(degree: startAngle),
+                      clockwise: clockwise,
+                      boxFit: boxFit,
+                    ),
+                    side: const BorderSide(
+                        color: Colors.red,
+                        width: 2.0),
+                  ),
+                ),
+                onPressed: () {},
+                child: const Icon(Icons.person, color: Colors.greenAccent),
+              ),
+            ),
+          ]
+      ),
+
+      Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // R2-C1. Rounded Polygon Clip
+            SizedBox(
+              height: shapeSize.height,
+              width: shapeSize.width,
+              child: GuiClipShape(
+                shape: GuiShapePolar(
+                  formula: (GeoAngle angle) {
+                    return 0.7 * cos(sides/3 * angle.radian).abs() + 0.3;
+                  },
+                  sampling: 60,
+                  cornerRadius: cornerRadius,
+                  startAngle: GeoAngle(degree: startAngle),
+                  clockwise: clockwise,
+                  boxFit: BoxFit.none,
+                ),
+                shadows: const [
+                  GuiShadow(color: Colors.red, elevation: 1.0),
+                  GuiShadow(color: Colors.grey, elevation: 4.0)
+                ],
+                child: Container(
+                    color: Colors.blue,
+                    child: const Center(
+                      child: Icon(Icons.person, color: Colors.white),
+                    )
+                ),
+              ),
+            ),
+            // R2-C2. Rounded Polygon Border
+            SizedBox(
+              height: shapeSize.height,
+              width: shapeSize.width,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: GuiShapeBorder(
+                    shape: GuiShapePolar(
+                      formula: (GeoAngle angle) {
+                        return 0.7 * cos(sides/3 * angle.radian).abs() + 0.3;
+                      },
+                      sampling: 60,
+                      cornerRadius: cornerRadius,
+                      startAngle: GeoAngle(degree: startAngle),
+                      clockwise: clockwise,
+                      boxFit: BoxFit.none,
+                    ),
+                    side: const BorderSide(
+                        color: Colors.purple,
+                        width: 2.0),
+                  ),
+                ),
+                onPressed: () {},
+                child: const Icon(Icons.person, color: Colors.yellow),
+              ),
+            ),
+            // R2-C3. Fitted Rounded Polygon Border
+            SizedBox(
+              height: shapeSize.height,
+              width: shapeSize.width,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: GuiShapeBorder(
+                    shape: GuiShapePolar(
+                      formula: (GeoAngle angle) {
+                        return 0.7 * cos(sides/3 * angle.radian).abs() + 0.3;
+                      },
+                      sampling: 60,
+                      cornerRadius: cornerRadius,
+                      startAngle: GeoAngle(degree: startAngle),
+                      clockwise: clockwise,
+                      boxFit: boxFit,
+                    ),
+                    side: const BorderSide(
+                        color: Colors.red,
+                        width: 2.0),
+                  ),
+                ),
+                onPressed: () {},
+                child: const Icon(Icons.person, color: Colors.greenAccent),
+              ),
+            ),
+          ]
+      ),
+
+      Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // R3-C1. Rotated Rounded Polygon Clip
+            SizedBox(
+              height: shapeSize.height,
+              width: shapeSize.width,
+              child: GuiClipShape(
+                shape: GuiShapePolar(
+                  formula: (GeoAngle angle) {
+                    return 0.7 * cos(sides/3 * angle.radian).abs() + 0.3;
+                  },
+                  sampling: 60,
+                  cornerRadius: cornerRadius,
+                  startAngle: GeoAngle(degree: startAngle + 45),
+                  clockwise: clockwise,
+                  boxFit: BoxFit.none,
+                ),
+                shadows: const [
+                  GuiShadow(color: Colors.red, elevation: 1.0),
+                  GuiShadow(color: Colors.grey, elevation: 4.0)
+                ],
+                child: Container(
+                    color: Colors.blue,
+                    child: const Center(
+                      child: Icon(Icons.person, color: Colors.white),
+                    )
+                ),
+              ),
+            ),
+            // R3-C2. Rotated Rounded Polygon Border
+            SizedBox(
+              height: shapeSize.height,
+              width: shapeSize.width,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: GuiShapeBorder(
+                    shape: GuiShapePolar(
+                      formula: (GeoAngle angle) {
+                        return 0.7 * cos(sides/3 * angle.radian).abs() + 0.3;
+                      },
+                      sampling: 60,
+                      cornerRadius: cornerRadius,
+                      startAngle: GeoAngle(degree: startAngle + 45),
+                      clockwise: clockwise,
+                      boxFit: BoxFit.none,
+                    ),
+                    side: const BorderSide(
+                        color: Colors.purple,
+                        width: 2.0),
+                  ),
+                ),
+                onPressed: () {},
+                child: const Icon(Icons.person, color: Colors.yellow),
+              ),
+            ),
+            // R3-C3. Rotated Fitted Rounded Polygon Border
+            SizedBox(
+              height: shapeSize.height,
+              width: shapeSize.width,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: GuiShapeBorder(
+                    shape: GuiShapePolar(
+                      formula: (GeoAngle angle) {
+                        return 0.7 * cos(sides/3 * angle.radian).abs() + 0.3;
+                      },
+                      sampling: 60,
+                      cornerRadius: cornerRadius,
+                      startAngle: GeoAngle(degree: startAngle + 45),
+                      clockwise: clockwise,
+                      boxFit: boxFit,
+                    ),
+                    side: const BorderSide(
+                        color: Colors.red,
+                        width: 2.0),
+                  ),
+                ),
+                onPressed: () {},
+                child: const Icon(Icons.person, color: Colors.greenAccent),
+              ),
+            ),
+          ]
+      ),
+    ];
+  }
+
 
   List<GeoCoordinate2D> customCoords = [];
   List<Widget> _drawCustom(Size shapeSize) {
