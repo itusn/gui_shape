@@ -46,9 +46,9 @@ import 'package:gui_shape/gui_shape.dart';
 Samples show n-sided polygons using **GuiClipShape**, and **GuiShapeBorder** with straight, rounded, stretched, and rotated properties.  Shape of polygon is defined by **GuiShapePolygon**.
 
 <table><tr>
-<td><img src="doc/polygon3.png" width="216" height="384"></td>
-<td><img src="doc/polygon5.png" width="216" height="384"></td>
-<td><img src="doc/polygon6.png" width="216" height="384"></td>
+<td><img src="https://raw.githubusercontent.com/itusn/gui_shape/main/doc/polygon3.png" width="216" height="384"></td>
+<td><img src="https://raw.githubusercontent.com/itusn/gui_shape/main/doc/polygon5.png" width="216" height="384"></td>
+<td><img src="https://raw.githubusercontent.com/itusn/gui_shape/main/doc/polygon6.png" width="216" height="384"></td>
 </tr></table>
 
 1) A 5-sided clip (pentagon shaped).
@@ -130,9 +130,9 @@ Samples show n-sided polygons using **GuiClipShape**, and **GuiShapeBorder** wit
 Samples show n-pointed stars using **GuiClipShape**, and **GuiShapeBorder** with straight, rounded, stretched, and rotated properties.  Shape of polygon is defined by **GuiShapeStar**.
 
 <table><tr>
-<td><img src="doc/star3.png" width="216" height="384"></td>
-<td><img src="doc/star5.png" width="216" height="384"></td>
-<td><img src="doc/star6.png" width="216" height="384"></td>
+<td><img src="https://raw.githubusercontent.com/itusn/gui_shape/main/doc/star3.png" width="216" height="384"></td>
+<td><img src="https://raw.githubusercontent.com/itusn/gui_shape/main/doc/star5.png" width="216" height="384"></td>
+<td><img src="https://raw.githubusercontent.com/itusn/gui_shape/main/doc/star6.png" width="216" height="384"></td>
 </tr></table>
 
 1) A 5-pointed star clip.
@@ -214,9 +214,9 @@ Samples show n-pointed stars using **GuiClipShape**, and **GuiShapeBorder** with
 Samples show polar shapes rendered by a function that sweeps 360 degrees (default).  Shape of a polar graph is defined by **GuiShapePolar** and may be used with **GuiClipShape** to clip a region, or **GuiShapeBorder** to create an outline.
 
 <table><tr>
-<td><img src="doc/polar3.png" width="216" height="384"></td>
-<td><img src="doc/polar4.png" width="216" height="384"></td>
-<td><img src="doc/polar9.png" width="216" height="384"></td>
+<td><img src="https://raw.githubusercontent.com/itusn/gui_shape/main/doc/polar3.png" width="216" height="384"></td>
+<td><img src="https://raw.githubusercontent.com/itusn/gui_shape/main/doc/polar4.png" width="216" height="384"></td>
+<td><img src="https://raw.githubusercontent.com/itusn/gui_shape/main/doc/polar9.png" width="216" height="384"></td>
 </tr></table>
 
 1) A user-defined polar function-based clip 
@@ -309,8 +309,8 @@ Samples show polar shapes rendered by a function that sweeps 360 degrees (defaul
 Samples show a custom polygon using **GuiClipShape**, and **GuiShapeBorder** with straight, rounded, stretched, and rotated properties.  Shape of polygon is defined by **GuiShapeCustom**.  Each point is defined by **GeoCoordinate2D**. 
 
 <table><tr>
-<td><img src="doc/custom5.png" width="216" height="384"></td>
-<td><img src="doc/custom7.png" width="216" height="384"></td>
+<td><img src="https://raw.githubusercontent.com/itusn/gui_shape/main/doc/custom5.png" width="216" height="384"></td>
+<td><img src="https://raw.githubusercontent.com/itusn/gui_shape/main/doc/custom7.png" width="216" height="384"></td>
 </tr></table>
 
 1) A custom shaped clip with rounded corners and fitted to container's dimensions.
@@ -377,7 +377,7 @@ Samples show a custom polygon using **GuiClipShape**, and **GuiShapeBorder** wit
 
 Samples show a custom gradient using **GuiNormalizeGradient**.  A map of stops, along with list of colors are provided in a 2-dimensional.  Each color is represented with it's stop location using **GuiGradientColor**. The normalized gradient will automatically compute stops within the range 0.0 (0%) and 1.0 (100%) (in cases stops with associated color are outside the rendering range).  The operation createImage() creates a bitmap image of the gradient with the specified dimensions for stops within the 0.0 and 1.0 range (both horizontally and vertically).
 
-<img src="doc/gradient7.png" width="216" height="384">
+<img src="https://raw.githubusercontent.com/itusn/gui_shape/main/doc/gradient7.png" width="216" height="384">
 
 1) A simple 100x200 gradient image with top left white, top right red, bottom left blue, and bottom right green.
 
