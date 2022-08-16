@@ -16,3 +16,8 @@ Initial release contains:
     - 2-dimensional (2D) gradient
 - Image
     - Bitmap file-format generator
+
+## 1.0.2
+- Updated README.md to use images hosted on github.
+- No functional changes
+
