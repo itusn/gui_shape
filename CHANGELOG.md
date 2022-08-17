@@ -21,3 +21,6 @@ Initial release contains:
 - Updated README.md to use images hosted on github.
 - No functional changes
 
+## 1.0.3
+- Addressed dark static code analysis warnings
+- Changed uppercase constants to lowercase
