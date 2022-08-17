@@ -18,9 +18,8 @@ class GuiShapeBorder extends OutlinedBorder {
 
   // Retrieve the path for the shape
   Path _getPath(Rect rect) {
-    return shape.getPath(size: rect.size).shift(
-        Offset(rect.center.dx - rect.width/2, rect.center.dy - rect.height/2)
-    );
+    return shape.getPath(size: rect.size).shift(Offset(
+        rect.center.dx - rect.width / 2, rect.center.dy - rect.height / 2));
   }
 
   @override
@@ -71,18 +70,11 @@ class GuiShapeBorder extends OutlinedBorder {
 
   @override
   ShapeBorder scale(double t) {
-    return GuiShapeBorder(
-        shape: shape,
-        side: side.scale(t)
-    );
+    return GuiShapeBorder(shape: shape, side: side.scale(t));
   }
 
   @override
   OutlinedBorder copyWith({BorderSide? side}) {
-    return GuiShapeBorder(
-        shape: shape,
-        side: side ?? this.side
-    );
+    return GuiShapeBorder(shape: shape, side: side ?? this.side);
   }
-
 }

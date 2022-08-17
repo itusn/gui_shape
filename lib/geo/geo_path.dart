@@ -9,7 +9,6 @@ import 'geo_common.dart';
 /// If [cornerRadius] is zero, the coordinates are converted into a [Path] without rounding corners.
 /// Otherwise, the start and end of the curve on two adjacent sides is determined by [cornerRadius] using a bezeir curve.
 class GeoPath {
-
   /// Raw coordinates
   final List<GeoCoordinate2D> coords;
 
@@ -38,24 +37,31 @@ class GeoPath {
     // COMMENTED: Radius used for Approach 2 (below)
     // Radius radius = Radius.circular(cornerRadius*5);
     for (int i = 0; i <= coords.length; i++) {
-      GeoCoordinate2D p1 = coords[(i+coords.length-1) % coords.length]; // previous point
+      GeoCoordinate2D p1 =
+          coords[(i + coords.length - 1) % coords.length]; // previous point
       GeoCoordinate2D p2 = coords[i % coords.length]; // current point
-      GeoCoordinate2D p3 = coords[(i+1) % coords.length]; // next point
+      GeoCoordinate2D p3 = coords[(i + 1) % coords.length]; // next point
 
       // calculate the angles between the lines formed by p1-p2 and p3-p2
       // Note: Handle vertical slope (ie. infinity) as a very large number
       // get slope between point 1 & 2, an 3 & 2
-      double mp2p1 = p2.slopeTo(p1);  // slope between point 1 and 2
-      if (mp2p1.isInfinite) mp2p1 = 0x80000000; // set to a large finite number, since we can't operate on infinity
-      double mp2p3 = p2.slopeTo(p3);  // slope between point 3 and 2
-      if (mp2p3.isInfinite) mp2p3 = 0x80000000; // set to a large finite number, since we can't operate on infinity
+      double mp2p1 = p2.slopeTo(p1); // slope between point 1 and 2
+      if (mp2p1.isInfinite)
+        mp2p1 =
+            0x80000000; // set to a large finite number, since we can't operate on infinity
+      double mp2p3 = p2.slopeTo(p3); // slope between point 3 and 2
+      if (mp2p3.isInfinite)
+        mp2p3 =
+            0x80000000; // set to a large finite number, since we can't operate on infinity
       double mp2p1xmp2p3 = (mp2p1 * mp2p3);
 
       // get angle between line P2P1 and Line P2P3 (ie. angle of P1-P2-P3)
       // if (mp2p1 * mp2p3)*k = -1*k then slopes are effectively perpendicular
       // we use k = 10000 so we can round the number and test for perpendicularity
       bool isPerpendicular = ((mp2p1xmp2p3 * k).roundToDouble() == -k);
-      double angle123 = isPerpendicular ? (pi/2) : atan((mp2p1 - mp2p3) / (1 + mp2p1xmp2p3));
+      double angle123 = isPerpendicular
+          ? (pi / 2)
+          : atan((mp2p1 - mp2p3) / (1 + mp2p1xmp2p3));
 
       // calculate the length of the segment at which rounding the corner should start/end
       // tan (angle123 / 2) = cornerRadius / segment from p2 to p1
@@ -91,5 +97,4 @@ class GeoPath {
     }
     return path;
   }
-
 }

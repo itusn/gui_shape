@@ -12,10 +12,9 @@ class GuiClipShape extends StatelessWidget {
   /// Create a clip with a specified shape (ie. [GuiCustomShape], [GuiShapePolygon], [GuiShapeStar], ...)
   /// Shadows with color and elevation may be defined to create floating effect.
   /// The child widget is clipped to the specified shape
-  const GuiClipShape({Key? key,
-        required this.shape,
-        this.shadows = const [],
-        this.child}) : super(key: key);
+  const GuiClipShape(
+      {Key? key, required this.shape, this.shadows = const [], this.child})
+      : super(key: key);
 
   /// Render a clipped child widget
   @override
@@ -23,13 +22,11 @@ class GuiClipShape extends StatelessWidget {
     return AspectRatio(
         aspectRatio: 1.0,
         child: CustomPaint(
-            painter: GuiShapeShadowPainter(shape,shadows!),
+            painter: GuiShapeShadowPainter(shape, shadows!),
             child: ClipPath(
               clipper: GuiShapeClipper(shape),
               child: child,
-            )
-        )
-    );
+            )));
   }
 }
 

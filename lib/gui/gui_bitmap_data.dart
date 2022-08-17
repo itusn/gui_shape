@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 /// The [GuiBitmapBuffer] class provides an interface for creating custom 24-bit or 32-bit bitmaps and flutter image
 class GuiBitmapBuffer {
-
   /// The structure of a Bitmap Buffer is defined below:
   /// Reference Documentation: https://en.wikipedia.org/wiki/BMP_file_format
   /// bitmap file header : (14 bytes)
@@ -53,8 +52,10 @@ class GuiBitmapBuffer {
 
   /// Starting offset of Bitmap header
   int get headerOffset => 0;
+
   /// Starting offset of Bitmap data
   int get imageOffset => 54;
+
   /// Starting offset of Bitmap image for row [row] (zero-based)
   int imageRowOffset(int row) {
     // row: base 0
@@ -63,6 +64,7 @@ class GuiBitmapBuffer {
 
   /// Constant for 32-bit pixel w/ ARGB value
   static const int bitsPerPixelArgb = 32;
+
   /// Constant for 24-bit pixel w/ RGB value
   static const int bitsPerPixelRgb = 24;
 
@@ -71,12 +73,15 @@ class GuiBitmapBuffer {
 
   /// Create a bitmap buffer with header prepopulated with necessary data.  The actual image data
   /// must still be populated by the user.
-  GuiBitmapBuffer({required this.width, required this.height, this.bitsPerPixel = bitsPerPixelArgb}) {
+  GuiBitmapBuffer(
+      {required this.width,
+      required this.height,
+      this.bitsPerPixel = bitsPerPixelArgb}) {
     _prepareHeader();
   }
 
   void _prepareHeader() {
-    _bytesPerPixel = (bitsPerPixel+7) ~/ 8; // # of bytes per pixel
+    _bytesPerPixel = (bitsPerPixel + 7) ~/ 8; // # of bytes per pixel
     _bytesPerRow = ((bitsPerPixel * width) / 32).ceil() * 4;
     int imgsize = (_bytesPerRow * height);
     int bmpsize = imgsize + 54;
@@ -116,5 +121,4 @@ class GuiBitmapBuffer {
   Image toImage() {
     return Image.memory(_imageData);
   }
-
 }

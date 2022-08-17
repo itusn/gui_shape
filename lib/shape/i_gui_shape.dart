@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 /// Interface for defining custom shape
 abstract class IGuiShape {
-
   /// Retrieve [Path] of shape
   Path getPath({required Size size});
 
@@ -11,5 +10,4 @@ abstract class IGuiShape {
 
   /// Linearly interpolate from this shape to other [shape] by an extrapolation factor `t`.
   IGuiShape lerpTo(IGuiShape shape, double t);
-
 }

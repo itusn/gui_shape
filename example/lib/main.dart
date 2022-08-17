@@ -56,8 +56,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     int rows = 3, columns = 3;
-    double xlen = (MediaQuery.of(context).size.width / columns - 4).roundToDouble();
-    double ylen = ((MediaQuery.of(context).size.height - 148) / rows - 4).roundToDouble();
+    double xlen =
+        (MediaQuery.of(context).size.width / columns - 4).roundToDouble();
+    double ylen =
+        ((MediaQuery.of(context).size.height - 148) / rows - 4).roundToDouble();
     // double mlen = ((xlen < ylen) ? xlen : ylen).roundToDouble();
 
     List<Widget> content = <Widget>[];
@@ -66,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // content.add(_caption("Polygons in ($mlen,$mlen)"));
       // content.addAll(_drawPolygons(Size( mlen, mlen )));
       content.add(_caption("Polygons in ($xlen,$ylen)"));
-      content.addAll(_drawPolygons(Size( xlen, ylen )));
+      content.addAll(_drawPolygons(Size(xlen, ylen)));
     }
 
     // add stars
@@ -74,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // content.add(_caption("Stars in ($mlen,$mlen)"));
       // content.addAll(_drawStars(Size( mlen, mlen )));
       content.add(_caption("Stars in ($xlen,$ylen)"));
-      content.addAll(_drawStars(Size( xlen, ylen )));
+      content.addAll(_drawStars(Size(xlen, ylen)));
     }
 
     // add polygons
@@ -82,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // content.add(_caption("Polar in ($mlen,$mlen)"));
       // content.addAll(_drawPolar(Size( mlen, mlen )));
       content.add(_caption("Polar in ($xlen,$ylen)"));
-      content.addAll(_drawPolar(Size( xlen, ylen )));
+      content.addAll(_drawPolar(Size(xlen, ylen)));
     }
 
     // add custom shape
@@ -90,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // content.add(_caption("Custom Shape in ($mlen,$mlen)"));
       // content.addAll(_drawCustom(Size( mlen, mlen )));
       content.add(_caption("Custom Shape in ($xlen,$ylen)"));
-      content.addAll(_drawCustom(Size( xlen, ylen )));
+      content.addAll(_drawCustom(Size(xlen, ylen)));
     }
 
     // add custom gradient
@@ -98,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // content.add(_caption("Custom Gradient in ($mlen,$mlen)"));
       // content.addAll(_drawCustomGradient(Size( mlen, mlen )));
       content.add(_caption("Custom Gradient in ($xlen,$ylen)"));
-      content.addAll(_drawCustomGradient(Size( xlen, ylen )));
+      content.addAll(_drawCustomGradient(Size(xlen, ylen)));
     }
 
     // add padding
@@ -106,61 +108,61 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // layout screen
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Demo"),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.check_box_outline_blank, color: _showPolygons? Colors.white : Colors.grey),
+      appBar: AppBar(
+        title: const Text("Demo"),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.check_box_outline_blank,
+                  color: _showPolygons ? Colors.white : Colors.grey),
               onPressed: () {
                 setState(() {
                   _showPolygons = !_showPolygons;
                 });
-              }
-            ),
-            IconButton(
-                icon: Icon(Icons.star_border, color: _showStars? Colors.white : Colors.grey),
-                onPressed: () {
-                  setState(() {
-                    _showStars = !_showStars;
-                  });
-                }
-            ),
-            IconButton(
-                icon: Icon(Icons.circle_outlined, color: _showPolar? Colors.white : Colors.grey),
-                onPressed: () {
-                  setState(() {
-                    _showPolar = !_showPolar;
-                  });
-                }
-            ),
-            IconButton(
-                icon: Icon(Icons.camera_outdoor, color: _showCustomShapes? Colors.white : Colors.grey),
-                onPressed: () {
-                  setState(() {
-                    _showCustomShapes = !_showCustomShapes;
-                  });
-                }
-            ),
-            IconButton(
-                icon: Icon(Icons.gradient, color: _showCustomGradient? Colors.white : Colors.grey),
-                onPressed: () {
-                  setState(() {
-                    _showCustomGradient = !_showCustomGradient;
-                  });
-                }
-            ),
-          ],
+              }),
+          IconButton(
+              icon: Icon(Icons.star_border,
+                  color: _showStars ? Colors.white : Colors.grey),
+              onPressed: () {
+                setState(() {
+                  _showStars = !_showStars;
+                });
+              }),
+          IconButton(
+              icon: Icon(Icons.circle_outlined,
+                  color: _showPolar ? Colors.white : Colors.grey),
+              onPressed: () {
+                setState(() {
+                  _showPolar = !_showPolar;
+                });
+              }),
+          IconButton(
+              icon: Icon(Icons.camera_outdoor,
+                  color: _showCustomShapes ? Colors.white : Colors.grey),
+              onPressed: () {
+                setState(() {
+                  _showCustomShapes = !_showCustomShapes;
+                });
+              }),
+          IconButton(
+              icon: Icon(Icons.gradient,
+                  color: _showCustomGradient ? Colors.white : Colors.grey),
+              onPressed: () {
+                setState(() {
+                  _showCustomGradient = !_showCustomGradient;
+                });
+              }),
+        ],
+      ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: content,
         ),
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: content,
-          ),
-        ),
-        bottomSheet: _buildOptions(),
-      );
+      ),
+      bottomSheet: _buildOptions(),
+    );
   }
 
   List<Widget> _drawPolygons(Size shapeSize) {
@@ -189,8 +191,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.blue,
                     child: const Center(
                       child: Icon(Icons.person, color: Colors.white),
-                    )
-                ),
+                    )),
               ),
             ),
             // R1-C2. Regular Polygon Border
@@ -207,9 +208,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       clockwise: clockwise,
                       boxFit: BoxFit.none,
                     ),
-                    side: const BorderSide(
-                        color: Colors.purple,
-                        width: 2.0), 
+                    side: const BorderSide(color: Colors.purple, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
@@ -230,18 +229,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       clockwise: clockwise,
                       boxFit: boxFit,
                     ),
-                    side: const BorderSide(
-                        color: Colors.red,
-                        width: 2.0), 
+                    side: const BorderSide(color: Colors.red, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
                 child: const Icon(Icons.person, color: Colors.greenAccent),
               ),
             ),
-          ]
-      ),
-
+          ]),
       Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -266,8 +261,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.blue,
                     child: const Center(
                       child: Icon(Icons.person, color: Colors.white),
-                    )
-                ),
+                    )),
               ),
             ),
             // R2-C2. Rounded Polygon Border
@@ -284,9 +278,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       clockwise: clockwise,
                       boxFit: BoxFit.none,
                     ),
-                    side: const BorderSide(
-                        color: Colors.purple,
-                        width: 2.0), 
+                    side: const BorderSide(color: Colors.purple, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
@@ -307,18 +299,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       clockwise: clockwise,
                       boxFit: boxFit,
                     ),
-                    side: const BorderSide(
-                        color: Colors.red,
-                        width: 2.0), 
+                    side: const BorderSide(color: Colors.red, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
                 child: const Icon(Icons.person, color: Colors.greenAccent),
               ),
             ),
-          ]
-      ),
-
+          ]),
       Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -343,8 +331,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.blue,
                     child: const Center(
                       child: Icon(Icons.person, color: Colors.white),
-                    )
-                ),
+                    )),
               ),
             ),
             // R3-C2. Rotated Rounded Polygon Border
@@ -361,9 +348,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       clockwise: clockwise,
                       boxFit: BoxFit.none,
                     ),
-                    side: const BorderSide(
-                        color: Colors.purple,
-                        width: 2.0), 
+                    side: const BorderSide(color: Colors.purple, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
@@ -384,17 +369,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       clockwise: clockwise,
                       boxFit: boxFit,
                     ),
-                    side: const BorderSide(
-                        color: Colors.red,
-                        width: 2.0), 
+                    side: const BorderSide(color: Colors.red, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
                 child: const Icon(Icons.person, color: Colors.greenAccent),
               ),
             ),
-          ]
-      ),
+          ]),
     ];
   }
 
@@ -425,8 +407,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.blue,
                     child: const Center(
                       child: Icon(Icons.person, color: Colors.white),
-                    )
-                ),
+                    )),
               ),
             ),
             // R1-C2. Regular Star Border
@@ -444,9 +425,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       boxFit: BoxFit.none,
                       indentSideFactor: indentSideFactor,
                     ),
-                    side: const BorderSide(
-                        color: Colors.purple,
-                        width: 2.0), 
+                    side: const BorderSide(color: Colors.purple, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
@@ -468,18 +447,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       boxFit: boxFit,
                       indentSideFactor: indentSideFactor,
                     ),
-                    side: const BorderSide(
-                        color: Colors.red,
-                        width: 2.0), 
+                    side: const BorderSide(color: Colors.red, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
                 child: const Icon(Icons.person, color: Colors.greenAccent),
               ),
             ),
-          ]
-      ),
-
+          ]),
       Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -505,8 +480,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.blue,
                     child: const Center(
                       child: Icon(Icons.person, color: Colors.white),
-                    )
-                ),
+                    )),
               ),
             ),
             // R2-C2. Rounded Star Border
@@ -524,9 +498,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       boxFit: BoxFit.none,
                       indentSideFactor: indentSideFactor,
                     ),
-                    side: const BorderSide(
-                        color: Colors.purple,
-                        width: 2.0), 
+                    side: const BorderSide(color: Colors.purple, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
@@ -548,18 +520,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       boxFit: boxFit,
                       indentSideFactor: indentSideFactor,
                     ),
-                    side: const BorderSide(
-                        color: Colors.red,
-                        width: 2.0), 
+                    side: const BorderSide(color: Colors.red, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
                 child: const Icon(Icons.person, color: Colors.greenAccent),
               ),
             ),
-          ]
-      ),
-
+          ]),
       Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -585,8 +553,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.blue,
                     child: const Center(
                       child: Icon(Icons.person, color: Colors.white),
-                    )
-                ),
+                    )),
               ),
             ),
             // R3-C2. Rotated Rounded Star Border
@@ -604,9 +571,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       boxFit: BoxFit.none,
                       indentSideFactor: indentSideFactor,
                     ),
-                    side: const BorderSide(
-                        color: Colors.purple,
-                        width: 2.0), 
+                    side: const BorderSide(color: Colors.purple, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
@@ -628,18 +593,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       boxFit: boxFit,
                       indentSideFactor: indentSideFactor,
                     ),
-                    side: const BorderSide(
-                        color: Colors.red,
-                        width: 2.0), 
+                    side: const BorderSide(color: Colors.red, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
                 child: const Icon(Icons.person, color: Colors.greenAccent),
               ),
             ),
-          ]
-      ),
-
+          ]),
     ];
   }
 
@@ -656,7 +617,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: GuiClipShape(
                 shape: GuiShapePolar(
                   formula: (GeoAngle angle) {
-                    return 0.7 * cos(sides/3 * angle.radian).abs() + 0.3;
+                    return 0.7 * cos(sides / 3 * angle.radian).abs() + 0.3;
                   },
                   sampling: 60,
                   polarBeginAngle: GeoAngle.zero.radian,
@@ -674,8 +635,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.blue,
                     child: const Center(
                       child: Icon(Icons.person, color: Colors.white),
-                    )
-                ),
+                    )),
               ),
             ),
             // R1-C2. Polar Border
@@ -687,7 +647,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   shape: GuiShapeBorder(
                     shape: GuiShapePolar(
                       formula: (GeoAngle angle) {
-                        return 0.7 * cos(sides/3 * angle.radian).abs() + 0.3;
+                        return 0.7 * cos(sides / 3 * angle.radian).abs() + 0.3;
                       },
                       sampling: 60,
                       cornerRadius: 0,
@@ -695,9 +655,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       clockwise: clockwise,
                       boxFit: BoxFit.none,
                     ),
-                    side: const BorderSide(
-                        color: Colors.purple,
-                        width: 2.0),
+                    side: const BorderSide(color: Colors.purple, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
@@ -713,7 +671,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   shape: GuiShapeBorder(
                     shape: GuiShapePolar(
                       formula: (GeoAngle angle) {
-                        return 0.7 * cos(sides/3 * angle.radian).abs() + 0.3;
+                        return 0.7 * cos(sides / 3 * angle.radian).abs() + 0.3;
                       },
                       sampling: 60,
                       cornerRadius: 0,
@@ -721,18 +679,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       clockwise: clockwise,
                       boxFit: boxFit,
                     ),
-                    side: const BorderSide(
-                        color: Colors.red,
-                        width: 2.0),
+                    side: const BorderSide(color: Colors.red, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
                 child: const Icon(Icons.person, color: Colors.greenAccent),
               ),
             ),
-          ]
-      ),
-
+          ]),
       Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -744,7 +698,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: GuiClipShape(
                 shape: GuiShapePolar(
                   formula: (GeoAngle angle) {
-                    return 0.7 * cos(sides/3 * angle.radian).abs() + 0.3;
+                    return 0.7 * cos(sides / 3 * angle.radian).abs() + 0.3;
                   },
                   sampling: 60,
                   cornerRadius: cornerRadius,
@@ -760,8 +714,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.blue,
                     child: const Center(
                       child: Icon(Icons.person, color: Colors.white),
-                    )
-                ),
+                    )),
               ),
             ),
             // R2-C2. Rounded Polar Border
@@ -773,7 +726,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   shape: GuiShapeBorder(
                     shape: GuiShapePolar(
                       formula: (GeoAngle angle) {
-                        return 0.7 * cos(sides/3 * angle.radian).abs() + 0.3;
+                        return 0.7 * cos(sides / 3 * angle.radian).abs() + 0.3;
                       },
                       sampling: 60,
                       cornerRadius: cornerRadius,
@@ -781,9 +734,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       clockwise: clockwise,
                       boxFit: BoxFit.none,
                     ),
-                    side: const BorderSide(
-                        color: Colors.purple,
-                        width: 2.0),
+                    side: const BorderSide(color: Colors.purple, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
@@ -799,7 +750,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   shape: GuiShapeBorder(
                     shape: GuiShapePolar(
                       formula: (GeoAngle angle) {
-                        return 0.7 * cos(sides/3 * angle.radian).abs() + 0.3;
+                        return 0.7 * cos(sides / 3 * angle.radian).abs() + 0.3;
                       },
                       sampling: 60,
                       cornerRadius: cornerRadius,
@@ -807,18 +758,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       clockwise: clockwise,
                       boxFit: boxFit,
                     ),
-                    side: const BorderSide(
-                        color: Colors.red,
-                        width: 2.0),
+                    side: const BorderSide(color: Colors.red, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
                 child: const Icon(Icons.person, color: Colors.greenAccent),
               ),
             ),
-          ]
-      ),
-
+          ]),
       Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -830,7 +777,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: GuiClipShape(
                 shape: GuiShapePolar(
                   formula: (GeoAngle angle) {
-                    return 0.7 * cos(sides/3 * angle.radian).abs() + 0.3;
+                    return 0.7 * cos(sides / 3 * angle.radian).abs() + 0.3;
                   },
                   sampling: 60,
                   cornerRadius: cornerRadius,
@@ -846,8 +793,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.blue,
                     child: const Center(
                       child: Icon(Icons.person, color: Colors.white),
-                    )
-                ),
+                    )),
               ),
             ),
             // R3-C2. Rotated Rounded Polar Border
@@ -859,7 +805,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   shape: GuiShapeBorder(
                     shape: GuiShapePolar(
                       formula: (GeoAngle angle) {
-                        return 0.7 * cos(sides/3 * angle.radian).abs() + 0.3;
+                        return 0.7 * cos(sides / 3 * angle.radian).abs() + 0.3;
                       },
                       sampling: 60,
                       cornerRadius: cornerRadius,
@@ -867,9 +813,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       clockwise: clockwise,
                       boxFit: BoxFit.none,
                     ),
-                    side: const BorderSide(
-                        color: Colors.purple,
-                        width: 2.0),
+                    side: const BorderSide(color: Colors.purple, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
@@ -885,7 +829,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   shape: GuiShapeBorder(
                     shape: GuiShapePolar(
                       formula: (GeoAngle angle) {
-                        return 0.7 * cos(sides/3 * angle.radian).abs() + 0.3;
+                        return 0.7 * cos(sides / 3 * angle.radian).abs() + 0.3;
                       },
                       sampling: 60,
                       cornerRadius: cornerRadius,
@@ -893,36 +837,31 @@ class _MyHomePageState extends State<MyHomePage> {
                       clockwise: clockwise,
                       boxFit: boxFit,
                     ),
-                    side: const BorderSide(
-                        color: Colors.red,
-                        width: 2.0),
+                    side: const BorderSide(color: Colors.red, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
                 child: const Icon(Icons.person, color: Colors.greenAccent),
               ),
             ),
-          ]
-      ),
+          ]),
     ];
   }
-
 
   List<GeoCoordinate2D> customCoords = [];
   List<Widget> _drawCustom(Size shapeSize) {
     if (sides != customCoords.length) {
-      double maxlen = shapeSize.width < shapeSize.height? shapeSize.width : shapeSize.height;
+      double maxlen = shapeSize.width < shapeSize.height
+          ? shapeSize.width
+          : shapeSize.height;
       customCoords = [];
       // create a random custom shape w/ N sides
       for (int i = 0; i < sides; i++) {
-        GeoAngle angle = GeoAngle(degree: i * 360/sides);
-        double radius = maxlen/2 * (0.4 + 0.6*_random.nextDouble());
-        customCoords.add(
-          GeoCoordinate2D(
-              maxlen/2 + radius * cos(angle.radian),
-              maxlen/2 - radius * sin(angle.radian)
-          )
-        );
+        GeoAngle angle = GeoAngle(degree: i * 360 / sides);
+        double radius = maxlen / 2 * (0.4 + 0.6 * _random.nextDouble());
+        customCoords.add(GeoCoordinate2D(
+            maxlen / 2 + radius * cos(angle.radian),
+            maxlen / 2 - radius * sin(angle.radian)));
       }
     }
 
@@ -951,8 +890,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.blue,
                     child: const Center(
                       child: Icon(Icons.person, color: Colors.white),
-                    )
-                ),
+                    )),
               ),
             ),
             // R1-C2. Regular Custom Border
@@ -969,9 +907,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       clockwise: clockwise,
                       boxFit: BoxFit.none,
                     ),
-                    side: const BorderSide(
-                        color: Colors.purple,
-                        width: 2.0), 
+                    side: const BorderSide(color: Colors.purple, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
@@ -992,18 +928,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       clockwise: clockwise,
                       boxFit: boxFit,
                     ),
-                    side: const BorderSide(
-                        color: Colors.red,
-                        width: 2.0), 
+                    side: const BorderSide(color: Colors.red, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
                 child: const Icon(Icons.person, color: Colors.greenAccent),
               ),
             ),
-          ]
-      ),
-
+          ]),
       Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -1028,8 +960,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.blue,
                     child: const Center(
                       child: Icon(Icons.person, color: Colors.white),
-                    )
-                ),
+                    )),
               ),
             ),
             // R2-C2. Rounded Custom Border
@@ -1046,9 +977,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       clockwise: clockwise,
                       boxFit: BoxFit.none,
                     ),
-                    side: const BorderSide(
-                        color: Colors.purple,
-                        width: 2.0), 
+                    side: const BorderSide(color: Colors.purple, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
@@ -1069,18 +998,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       clockwise: clockwise,
                       boxFit: boxFit,
                     ),
-                    side: const BorderSide(
-                        color: Colors.red,
-                        width: 2.0), 
+                    side: const BorderSide(color: Colors.red, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
                 child: const Icon(Icons.person, color: Colors.greenAccent),
               ),
             ),
-          ]
-      ),
-
+          ]),
       Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -1105,8 +1030,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.blue,
                     child: const Center(
                       child: Icon(Icons.person, color: Colors.white),
-                    )
-                ),
+                    )),
               ),
             ),
             // R3-C2. Rotated Rounded Custom Border
@@ -1123,9 +1047,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       clockwise: clockwise,
                       boxFit: BoxFit.none,
                     ),
-                    side: const BorderSide(
-                        color: Colors.purple,
-                        width: 2.0), 
+                    side: const BorderSide(color: Colors.purple, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
@@ -1146,18 +1068,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       clockwise: clockwise,
                       boxFit: boxFit,
                     ),
-                    side: const BorderSide(
-                        color: Colors.red,
-                        width: 2.0), 
+                    side: const BorderSide(color: Colors.red, width: 2.0),
                   ),
                 ),
                 onPressed: () {},
                 child: const Icon(Icons.person, color: Colors.greenAccent),
               ),
             ),
-          ]
-      ),
-
+          ]),
     ];
   }
 
@@ -1168,12 +1086,24 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             GuiNormalizeGradient({
-              0.0: <GuiGradientColor>[GuiGradientColor(Colors.white,0.0), GuiGradientColor(Colors.red, 1.0) ],
-              1.0: <GuiGradientColor>[GuiGradientColor(Colors.blue,0.0), GuiGradientColor(Colors.green, 1.0) ],
+              0.0: <GuiGradientColor>[
+                GuiGradientColor(Colors.white, 0.0),
+                GuiGradientColor(Colors.red, 1.0)
+              ],
+              1.0: <GuiGradientColor>[
+                GuiGradientColor(Colors.blue, 0.0),
+                GuiGradientColor(Colors.green, 1.0)
+              ],
             }).createImage(shapeSize.width.toInt(), shapeSize.height.toInt()),
             GuiNormalizeGradient({
-              -0.1: <GuiGradientColor>[GuiGradientColor(const Color.fromARGB(255, 255, 0, 0),-0.1), GuiGradientColor(const Color.fromARGB(255, 255, 255, 0), 1.1)],
-              1.1: <GuiGradientColor>[GuiGradientColor(const Color.fromARGB(255, 0, 255, 0),-0.1), GuiGradientColor(const Color.fromARGB(255, 0, 0, 255), 1.1)],
+              -0.1: <GuiGradientColor>[
+                GuiGradientColor(const Color.fromARGB(255, 255, 0, 0), -0.1),
+                GuiGradientColor(const Color.fromARGB(255, 255, 255, 0), 1.1)
+              ],
+              1.1: <GuiGradientColor>[
+                GuiGradientColor(const Color.fromARGB(255, 0, 255, 0), -0.1),
+                GuiGradientColor(const Color.fromARGB(255, 0, 0, 255), 1.1)
+              ],
             }).createImage(shapeSize.width.toInt(), shapeSize.height.toInt()),
             SizedBox(
               height: shapeSize.height,
@@ -1192,33 +1122,103 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
                 child: GuiGradientImage.fromNormalizeGradient(
                     GuiNormalizeGradient({
-                      0.0: <GuiGradientColor>[GuiGradientColor(Colors.red,0.0), GuiGradientColor(Colors.purple, 0.5), GuiGradientColor(Colors.yellow, 1.0) ],
-                      0.5: <GuiGradientColor>[GuiGradientColor(Colors.blue,0.0), GuiGradientColor(Colors.yellow, 0.5), GuiGradientColor(Colors.green, 1.0) ],
-                      1.0: <GuiGradientColor>[GuiGradientColor(Colors.yellow,0.0), GuiGradientColor(Colors.indigo, 0.5), GuiGradientColor(Colors.amber, 1.0) ],
+                      0.0: <GuiGradientColor>[
+                        GuiGradientColor(Colors.red, 0.0),
+                        GuiGradientColor(Colors.purple, 0.5),
+                        GuiGradientColor(Colors.yellow, 1.0)
+                      ],
+                      0.5: <GuiGradientColor>[
+                        GuiGradientColor(Colors.blue, 0.0),
+                        GuiGradientColor(Colors.yellow, 0.5),
+                        GuiGradientColor(Colors.green, 1.0)
+                      ],
+                      1.0: <GuiGradientColor>[
+                        GuiGradientColor(Colors.yellow, 0.0),
+                        GuiGradientColor(Colors.indigo, 0.5),
+                        GuiGradientColor(Colors.amber, 1.0)
+                      ],
                     }),
-                    shapeSize
-                ),
+                    shapeSize),
               ),
             ),
-          ]
-      ),
+          ]),
       Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             GuiNormalizeGradient({
-              0.0: <GuiGradientColor>[GuiGradientColor(Colors.white,0.0), GuiGradientColor(Colors.red, 0.25), GuiGradientColor(Colors.white, 0.5), GuiGradientColor(Colors.red, 0.75), GuiGradientColor(Colors.white, 1.0) ],
-              0.25: <GuiGradientColor>[GuiGradientColor(Colors.red,0.0), GuiGradientColor(Colors.white, 0.25), GuiGradientColor(Colors.red, 0.5), GuiGradientColor(Colors.white, 0.75), GuiGradientColor(Colors.red, 1.0) ],
-              0.5: <GuiGradientColor>[GuiGradientColor(Colors.white,0.0), GuiGradientColor(Colors.red, 0.25), GuiGradientColor(Colors.white, 0.5), GuiGradientColor(Colors.red, 0.75), GuiGradientColor(Colors.white, 1.0) ],
-              0.75: <GuiGradientColor>[GuiGradientColor(Colors.red,0.0), GuiGradientColor(Colors.white, 0.25), GuiGradientColor(Colors.red, 0.5), GuiGradientColor(Colors.white, 0.75), GuiGradientColor(Colors.red, 1.0) ],
-              1.0: <GuiGradientColor>[GuiGradientColor(Colors.white,0.0), GuiGradientColor(Colors.red, 0.25), GuiGradientColor(Colors.white, 0.5), GuiGradientColor(Colors.red, 0.75), GuiGradientColor(Colors.white, 1.0) ],
+              0.0: <GuiGradientColor>[
+                GuiGradientColor(Colors.white, 0.0),
+                GuiGradientColor(Colors.red, 0.25),
+                GuiGradientColor(Colors.white, 0.5),
+                GuiGradientColor(Colors.red, 0.75),
+                GuiGradientColor(Colors.white, 1.0)
+              ],
+              0.25: <GuiGradientColor>[
+                GuiGradientColor(Colors.red, 0.0),
+                GuiGradientColor(Colors.white, 0.25),
+                GuiGradientColor(Colors.red, 0.5),
+                GuiGradientColor(Colors.white, 0.75),
+                GuiGradientColor(Colors.red, 1.0)
+              ],
+              0.5: <GuiGradientColor>[
+                GuiGradientColor(Colors.white, 0.0),
+                GuiGradientColor(Colors.red, 0.25),
+                GuiGradientColor(Colors.white, 0.5),
+                GuiGradientColor(Colors.red, 0.75),
+                GuiGradientColor(Colors.white, 1.0)
+              ],
+              0.75: <GuiGradientColor>[
+                GuiGradientColor(Colors.red, 0.0),
+                GuiGradientColor(Colors.white, 0.25),
+                GuiGradientColor(Colors.red, 0.5),
+                GuiGradientColor(Colors.white, 0.75),
+                GuiGradientColor(Colors.red, 1.0)
+              ],
+              1.0: <GuiGradientColor>[
+                GuiGradientColor(Colors.white, 0.0),
+                GuiGradientColor(Colors.red, 0.25),
+                GuiGradientColor(Colors.white, 0.5),
+                GuiGradientColor(Colors.red, 0.75),
+                GuiGradientColor(Colors.white, 1.0)
+              ],
             }).createImage(shapeSize.width.toInt(), shapeSize.height.toInt()),
             GuiNormalizeGradient({
-              0.0: <GuiGradientColor>[GuiGradientColor(Colors.yellow,0.0), GuiGradientColor(Colors.red, 0.25), GuiGradientColor(Colors.white, 0.5), GuiGradientColor(Colors.red, 0.75), GuiGradientColor(Colors.white, 1.0) ],
-              0.25: <GuiGradientColor>[GuiGradientColor(Colors.red,0.0), GuiGradientColor(Colors.yellow, 0.25), GuiGradientColor(Colors.red, 0.5), GuiGradientColor(Colors.yellow, 0.75), GuiGradientColor(Colors.red, 1.0) ],
-              0.5: <GuiGradientColor>[GuiGradientColor(Colors.white,0.0), GuiGradientColor(Colors.red, 0.25), GuiGradientColor(Colors.yellow, 0.5), GuiGradientColor(Colors.red, 0.75), GuiGradientColor(Colors.white, 1.0) ],
-              0.75: <GuiGradientColor>[GuiGradientColor(Colors.red,0.0), GuiGradientColor(Colors.yellow, 0.25), GuiGradientColor(Colors.red, 0.5), GuiGradientColor(Colors.yellow, 0.75), GuiGradientColor(Colors.red, 1.0) ],
-              1.0: <GuiGradientColor>[GuiGradientColor(Colors.white,0.0), GuiGradientColor(Colors.red, 0.25), GuiGradientColor(Colors.white, 0.5), GuiGradientColor(Colors.red, 0.75), GuiGradientColor(Colors.yellow, 1.0) ],
+              0.0: <GuiGradientColor>[
+                GuiGradientColor(Colors.yellow, 0.0),
+                GuiGradientColor(Colors.red, 0.25),
+                GuiGradientColor(Colors.white, 0.5),
+                GuiGradientColor(Colors.red, 0.75),
+                GuiGradientColor(Colors.white, 1.0)
+              ],
+              0.25: <GuiGradientColor>[
+                GuiGradientColor(Colors.red, 0.0),
+                GuiGradientColor(Colors.yellow, 0.25),
+                GuiGradientColor(Colors.red, 0.5),
+                GuiGradientColor(Colors.yellow, 0.75),
+                GuiGradientColor(Colors.red, 1.0)
+              ],
+              0.5: <GuiGradientColor>[
+                GuiGradientColor(Colors.white, 0.0),
+                GuiGradientColor(Colors.red, 0.25),
+                GuiGradientColor(Colors.yellow, 0.5),
+                GuiGradientColor(Colors.red, 0.75),
+                GuiGradientColor(Colors.white, 1.0)
+              ],
+              0.75: <GuiGradientColor>[
+                GuiGradientColor(Colors.red, 0.0),
+                GuiGradientColor(Colors.yellow, 0.25),
+                GuiGradientColor(Colors.red, 0.5),
+                GuiGradientColor(Colors.yellow, 0.75),
+                GuiGradientColor(Colors.red, 1.0)
+              ],
+              1.0: <GuiGradientColor>[
+                GuiGradientColor(Colors.white, 0.0),
+                GuiGradientColor(Colors.red, 0.25),
+                GuiGradientColor(Colors.white, 0.5),
+                GuiGradientColor(Colors.red, 0.75),
+                GuiGradientColor(Colors.yellow, 1.0)
+              ],
             }).createImage(shapeSize.width.toInt(), shapeSize.height.toInt()),
             SizedBox(
               height: shapeSize.height,
@@ -1237,35 +1237,198 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
                 child: GuiGradientImage.fromNormalizeGradient(
                     GuiNormalizeGradient({
-                      0.0: <GuiGradientColor>[GuiGradientColor(Colors.yellow,0.0), GuiGradientColor(Colors.red, 0.25), GuiGradientColor(Colors.white, 0.5), GuiGradientColor(Colors.red, 0.75), GuiGradientColor(Colors.white, 1.0) ],
-                      0.25: <GuiGradientColor>[GuiGradientColor(Colors.red,0.0), GuiGradientColor(Colors.yellow, 0.25), GuiGradientColor(Colors.red, 0.5), GuiGradientColor(Colors.yellow, 0.75), GuiGradientColor(Colors.red, 1.0) ],
-                      0.5: <GuiGradientColor>[GuiGradientColor(Colors.white,0.0), GuiGradientColor(Colors.red, 0.25), GuiGradientColor(Colors.yellow, 0.5), GuiGradientColor(Colors.red, 0.75), GuiGradientColor(Colors.white, 1.0) ],
-                      0.75: <GuiGradientColor>[GuiGradientColor(Colors.red,0.0), GuiGradientColor(Colors.yellow, 0.25), GuiGradientColor(Colors.red, 0.5), GuiGradientColor(Colors.yellow, 0.75), GuiGradientColor(Colors.red, 1.0) ],
-                      1.0: <GuiGradientColor>[GuiGradientColor(Colors.white,0.0), GuiGradientColor(Colors.red, 0.25), GuiGradientColor(Colors.white, 0.5), GuiGradientColor(Colors.red, 0.75), GuiGradientColor(Colors.yellow, 1.0) ],
+                      0.0: <GuiGradientColor>[
+                        GuiGradientColor(Colors.yellow, 0.0),
+                        GuiGradientColor(Colors.red, 0.25),
+                        GuiGradientColor(Colors.white, 0.5),
+                        GuiGradientColor(Colors.red, 0.75),
+                        GuiGradientColor(Colors.white, 1.0)
+                      ],
+                      0.25: <GuiGradientColor>[
+                        GuiGradientColor(Colors.red, 0.0),
+                        GuiGradientColor(Colors.yellow, 0.25),
+                        GuiGradientColor(Colors.red, 0.5),
+                        GuiGradientColor(Colors.yellow, 0.75),
+                        GuiGradientColor(Colors.red, 1.0)
+                      ],
+                      0.5: <GuiGradientColor>[
+                        GuiGradientColor(Colors.white, 0.0),
+                        GuiGradientColor(Colors.red, 0.25),
+                        GuiGradientColor(Colors.yellow, 0.5),
+                        GuiGradientColor(Colors.red, 0.75),
+                        GuiGradientColor(Colors.white, 1.0)
+                      ],
+                      0.75: <GuiGradientColor>[
+                        GuiGradientColor(Colors.red, 0.0),
+                        GuiGradientColor(Colors.yellow, 0.25),
+                        GuiGradientColor(Colors.red, 0.5),
+                        GuiGradientColor(Colors.yellow, 0.75),
+                        GuiGradientColor(Colors.red, 1.0)
+                      ],
+                      1.0: <GuiGradientColor>[
+                        GuiGradientColor(Colors.white, 0.0),
+                        GuiGradientColor(Colors.red, 0.25),
+                        GuiGradientColor(Colors.white, 0.5),
+                        GuiGradientColor(Colors.red, 0.75),
+                        GuiGradientColor(Colors.yellow, 1.0)
+                      ],
                     }),
-                    shapeSize
-                ),
+                    shapeSize),
               ),
             ),
-          ]
-      ),
+          ]),
       Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             GuiNormalizeGradient({
-              0.0: <GuiGradientColor>[GuiGradientColor(Colors.yellow,0.0), GuiGradientColor(Colors.yellow, 0.25), GuiGradientColor(Colors.green, 0.5), GuiGradientColor(Colors.yellow, 0.75), GuiGradientColor(Colors.red, 1.0) ],
-              0.25: <GuiGradientColor>[GuiGradientColor(Colors.green,0.0), GuiGradientColor(Colors.green, 0.25), GuiGradientColor(Colors.green, 0.5), GuiGradientColor(Colors.green, 0.75), GuiGradientColor(Colors.yellow, 1.0) ],
-              0.5: <GuiGradientColor>[GuiGradientColor(Colors.green,0.0), GuiGradientColor(Colors.blue, 0.25), GuiGradientColor(Colors.blue, 0.5), GuiGradientColor(Colors.red, 0.75), GuiGradientColor(Colors.green, 1.0) ],
-              0.75: <GuiGradientColor>[GuiGradientColor(Colors.yellow,0.0), GuiGradientColor(Colors.blue, 0.25), GuiGradientColor(Colors.white, 0.5), GuiGradientColor(Colors.white, 0.75), GuiGradientColor(Colors.green, 1.0) ],
-              1.0: <GuiGradientColor>[GuiGradientColor(Colors.yellow,0.0), GuiGradientColor(Colors.green, 0.25), GuiGradientColor(Colors.blue, 0.5), GuiGradientColor(Colors.green, 0.75), GuiGradientColor(Colors.white, 1.0) ],
+              0.0: <GuiGradientColor>[
+                GuiGradientColor(Colors.yellow, 0.0),
+                GuiGradientColor(Colors.yellow, 0.25),
+                GuiGradientColor(Colors.green, 0.5),
+                GuiGradientColor(Colors.yellow, 0.75),
+                GuiGradientColor(Colors.red, 1.0)
+              ],
+              0.25: <GuiGradientColor>[
+                GuiGradientColor(Colors.green, 0.0),
+                GuiGradientColor(Colors.green, 0.25),
+                GuiGradientColor(Colors.green, 0.5),
+                GuiGradientColor(Colors.green, 0.75),
+                GuiGradientColor(Colors.yellow, 1.0)
+              ],
+              0.5: <GuiGradientColor>[
+                GuiGradientColor(Colors.green, 0.0),
+                GuiGradientColor(Colors.blue, 0.25),
+                GuiGradientColor(Colors.blue, 0.5),
+                GuiGradientColor(Colors.red, 0.75),
+                GuiGradientColor(Colors.green, 1.0)
+              ],
+              0.75: <GuiGradientColor>[
+                GuiGradientColor(Colors.yellow, 0.0),
+                GuiGradientColor(Colors.blue, 0.25),
+                GuiGradientColor(Colors.white, 0.5),
+                GuiGradientColor(Colors.white, 0.75),
+                GuiGradientColor(Colors.green, 1.0)
+              ],
+              1.0: <GuiGradientColor>[
+                GuiGradientColor(Colors.yellow, 0.0),
+                GuiGradientColor(Colors.green, 0.25),
+                GuiGradientColor(Colors.blue, 0.5),
+                GuiGradientColor(Colors.green, 0.75),
+                GuiGradientColor(Colors.white, 1.0)
+              ],
             }).createImage(shapeSize.width.toInt(), shapeSize.height.toInt()),
             GuiNormalizeGradient({
-              0.0: <GuiGradientColor>[GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)),0.0), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.25), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.5), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.75), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 1.0) ],
-              0.25: <GuiGradientColor>[GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)),0.0), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.25), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.5), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.75), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 1.0) ],
-              0.5: <GuiGradientColor>[GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)),0.0), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.25), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.5), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.75), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 1.0) ],
-              0.75: <GuiGradientColor>[GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)),0.0), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.25), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.5), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.75), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 1.0) ],
-              1.0: <GuiGradientColor>[GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)),0.0), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.25), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.5), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.75), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 1.0) ],
+              0.0: <GuiGradientColor>[
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    0.0),
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    0.25),
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    0.5),
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    0.75),
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    1.0)
+              ],
+              0.25: <GuiGradientColor>[
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    0.0),
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    0.25),
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    0.5),
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    0.75),
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    1.0)
+              ],
+              0.5: <GuiGradientColor>[
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    0.0),
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    0.25),
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    0.5),
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    0.75),
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    1.0)
+              ],
+              0.75: <GuiGradientColor>[
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    0.0),
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    0.25),
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    0.5),
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    0.75),
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    1.0)
+              ],
+              1.0: <GuiGradientColor>[
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    0.0),
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    0.25),
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    0.5),
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    0.75),
+                GuiGradientColor(
+                    Color.fromARGB(_random.nextInt(255), _random.nextInt(255),
+                        _random.nextInt(255), _random.nextInt(255)),
+                    1.0)
+              ],
             }).createImage(shapeSize.width.toInt(), shapeSize.height.toInt()),
             SizedBox(
               height: shapeSize.height,
@@ -1284,21 +1447,201 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
                 child: GuiGradientImage.fromNormalizeGradient(
                     GuiNormalizeGradient({
-                      0.0: <GuiGradientColor>[GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)),0.0), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.01 + _random.nextInt(24)/100), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.25 + _random.nextInt(50)/100), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.75 + _random.nextInt(24)/100), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 1.0) ],
-                      (0.25 - 0.125 + _random.nextInt(25)/100): <GuiGradientColor>[GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)),0.0), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.01 + _random.nextInt(24)/100), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.25 + _random.nextInt(50)/100), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.75 + _random.nextInt(24)/100), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 1.0) ],
-                      (0.5 - 0.125 + _random.nextInt(25)/100): <GuiGradientColor>[GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)),0.0), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.01 + _random.nextInt(24)/100), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.25 + _random.nextInt(50)/100), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.75 + _random.nextInt(24)/100), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 1.0) ],
-                      (0.75 - 0.125 + _random.nextInt(25)/100): <GuiGradientColor>[GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)),0.0), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.01 + _random.nextInt(24)/100), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.25 + _random.nextInt(50)/100), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.75 + _random.nextInt(24)/100), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 1.0) ],
-                      1.0: <GuiGradientColor>[GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)),0.0), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.01 + _random.nextInt(24)/100), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.25 + _random.nextInt(50)/100), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 0.75 + _random.nextInt(24)/100), GuiGradientColor(Color.fromARGB(_random.nextInt(255), _random.nextInt(255), _random.nextInt(255), _random.nextInt(255)), 1.0) ],
+                      0.0: <GuiGradientColor>[
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            0.0),
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            0.01 + _random.nextInt(24) / 100),
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            0.25 + _random.nextInt(50) / 100),
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            0.75 + _random.nextInt(24) / 100),
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            1.0)
+                      ],
+                      (0.25 - 0.125 + _random.nextInt(25) / 100):
+                          <GuiGradientColor>[
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            0.0),
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            0.01 + _random.nextInt(24) / 100),
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            0.25 + _random.nextInt(50) / 100),
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            0.75 + _random.nextInt(24) / 100),
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            1.0)
+                      ],
+                      (0.5 - 0.125 + _random.nextInt(25) / 100):
+                          <GuiGradientColor>[
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            0.0),
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            0.01 + _random.nextInt(24) / 100),
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            0.25 + _random.nextInt(50) / 100),
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            0.75 + _random.nextInt(24) / 100),
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            1.0)
+                      ],
+                      (0.75 - 0.125 + _random.nextInt(25) / 100):
+                          <GuiGradientColor>[
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            0.0),
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            0.01 + _random.nextInt(24) / 100),
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            0.25 + _random.nextInt(50) / 100),
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            0.75 + _random.nextInt(24) / 100),
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            1.0)
+                      ],
+                      1.0: <GuiGradientColor>[
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            0.0),
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            0.01 + _random.nextInt(24) / 100),
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            0.25 + _random.nextInt(50) / 100),
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            0.75 + _random.nextInt(24) / 100),
+                        GuiGradientColor(
+                            Color.fromARGB(
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255),
+                                _random.nextInt(255)),
+                            1.0)
+                      ],
                     }),
-                    shapeSize
-                ),
+                    shapeSize),
               ),
             ),
-          ]
-      )
+          ])
     ];
   }
-
 
   Widget _caption(String caption) {
     return Container(
@@ -1306,9 +1649,7 @@ class _MyHomePageState extends State<MyHomePage> {
         width: double.infinity,
         child: Padding(
             padding: const EdgeInsets.all(8),
-            child: Text(caption, textAlign: TextAlign.center)
-        )
-    );
+            child: Text(caption, textAlign: TextAlign.center)));
   }
 
   Widget _buildOptions() {
@@ -1316,59 +1657,55 @@ class _MyHomePageState extends State<MyHomePage> {
         height: 48,
         width: double.infinity,
         color: Colors.black,
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton(
-                child: Text("S: $sides"),
-                onPressed: () {
-                  setState(() {
-                    sides++;
-                  });
-                },
-              ),
-              ElevatedButton(
-                child: Text(clockwise? "CW": "CC"),
-                onPressed: () {
-                  setState(() {
-                    clockwise = !clockwise;
-                  });
-                },
-              ),
-              ElevatedButton(
-                child: Text("IS: $indentSideFactor"),
-                onPressed: () {
-                  setState(() {
-                    // increment by 0.1 (and wrap around to 0.0 after 1.0)
-                    indentSideFactor = (((indentSideFactor + 0.1) * 100).toInt() % 100) / 100;
-                  });
-                },
-              ),
-              ElevatedButton(
-                child: Text("A: $startAngle"),
-                onPressed: () {
-                  setState(() {
-                    // increment by 0.1 (and wrap around to 0.0 after 1.0)
-                    startAngle = (startAngle + 5)  % 360;
-                  });
-                },
-              ),
-              ElevatedButton(
-                child: const Icon(Icons.restore),
-                onPressed: () {
-                  setState(() {
-                    sides = 3;
-                    cornerRadius = 8;
-                    indentSideFactor = 0.3;
-                    startAngle = 0;
-                    boxFit = BoxFit.fill;
-                    clockwise = false;
-                  });
-                },
-              ),
-            ]
-        )
-    );
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          ElevatedButton(
+            child: Text("S: $sides"),
+            onPressed: () {
+              setState(() {
+                sides++;
+              });
+            },
+          ),
+          ElevatedButton(
+            child: Text(clockwise ? "CW" : "CC"),
+            onPressed: () {
+              setState(() {
+                clockwise = !clockwise;
+              });
+            },
+          ),
+          ElevatedButton(
+            child: Text("IS: $indentSideFactor"),
+            onPressed: () {
+              setState(() {
+                // increment by 0.1 (and wrap around to 0.0 after 1.0)
+                indentSideFactor =
+                    (((indentSideFactor + 0.1) * 100).toInt() % 100) / 100;
+              });
+            },
+          ),
+          ElevatedButton(
+            child: Text("A: $startAngle"),
+            onPressed: () {
+              setState(() {
+                // increment by 0.1 (and wrap around to 0.0 after 1.0)
+                startAngle = (startAngle + 5) % 360;
+              });
+            },
+          ),
+          ElevatedButton(
+            child: const Icon(Icons.restore),
+            onPressed: () {
+              setState(() {
+                sides = 3;
+                cornerRadius = 8;
+                indentSideFactor = 0.3;
+                startAngle = 0;
+                boxFit = BoxFit.fill;
+                clockwise = false;
+              });
+            },
+          ),
+        ]));
   }
-
 }

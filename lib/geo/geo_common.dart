@@ -5,8 +5,10 @@ import 'dart:ui';
 class GeoCoordinate {
   /// The x-coordinate in a 3-dimensional space
   double x;
+
   /// The y-coordinate in a 3-dimensional space
   double y;
+
   /// The x-coordinate in a 3-dimensional space
   double z;
 
@@ -14,12 +16,16 @@ class GeoCoordinate {
   GeoCoordinate(this.x, this.y, this.z);
 
   /// Calculate the distance between two points
-  double distanceTo(GeoCoordinate point) => (sqrt(pow(point.y - y,2) + pow(point.x - x,2) + pow(point.z - z,2)));
+  double distanceTo(GeoCoordinate point) =>
+      (sqrt(pow(point.y - y, 2) + pow(point.x - x, 2) + pow(point.z - z, 2)));
 
   /// Compare two coordinates for equality.
   @override
   bool operator ==(Object other) {
-    return (other is GeoCoordinate) && (other.x == x) && (other.y == y) && (other.z == z);
+    return (other is GeoCoordinate) &&
+        (other.x == x) &&
+        (other.y == y) &&
+        (other.z == z);
   }
 
   /// Translate a coordinate by another by adding it's respective coordinates.
@@ -48,21 +54,15 @@ class GeoCoordinate {
   /// Linearly interpolate from [other] coordinate to this coordinate by
   /// an extrapolation factor `t`.
   GeoCoordinate lerpFrom(GeoCoordinate other, double t) {
-    return GeoCoordinate(
-      lerpDouble(other.x, x, t)!,
-      lerpDouble(other.y, y, t)!,
-      lerpDouble(other.z, z, t)!
-    );
+    return GeoCoordinate(lerpDouble(other.x, x, t)!, lerpDouble(other.y, y, t)!,
+        lerpDouble(other.z, z, t)!);
   }
 
   /// Linearly interpolate from this coordinate to [other] coordinate by
   /// an extrapolation factor `t`.
   GeoCoordinate lerpTo(GeoCoordinate other, double t) {
-    return GeoCoordinate(
-        lerpDouble(x, other.x, t)!,
-        lerpDouble(y, other.y, t)!,
-        lerpDouble(z, other.z, t)!
-    );
+    return GeoCoordinate(lerpDouble(x, other.x, t)!, lerpDouble(y, other.y, t)!,
+        lerpDouble(z, other.z, t)!);
   }
 
   /// Represent coordinate as a printable string (x: #, y: #, z: #).
@@ -74,30 +74,29 @@ class GeoCoordinate {
   /// Calculate hashcode of 3-dimensional coordinate.
   @override
   int get hashCode {
-    return x.hashCode ^ (y.hashCode*17) ^ (z.hashCode*29);
+    return x.hashCode ^ (y.hashCode * 17) ^ (z.hashCode * 29);
   }
-
 }
 
 /// The [GeoCoordinate2D] class defines (x,y) coordinates on a 2-dimensional plane (w/ z = 0 implied).
 class GeoCoordinate2D extends GeoCoordinate {
-
   /// Constructor for [GeoCoordinate]
   GeoCoordinate2D(double x, double y) : super(x, y, 0);
 
   /// Convert 2-dimensional coordinate to [Offset] class (defined in dart:ui library).
-  Offset asOffset() => Offset(x,y);
+  Offset asOffset() => Offset(x, y);
 
   /// Calculate slope between 2 points
   double slopeTo(GeoCoordinate2D point) => ((point.y - y) / (point.x - x));
 
   /// Compute distance between 2 points
   @override
-  double distanceTo(GeoCoordinate point) => (sqrt(pow(point.y - y,2) + pow(point.x - x,2)));
+  double distanceTo(GeoCoordinate point) =>
+      (sqrt(pow(point.y - y, 2) + pow(point.x - x, 2)));
 
   /// Rotate coordinate by specified [angle] using [pivot] as center of rotation.
   GeoCoordinate2D rotate(GeoAngle angle, [GeoCoordinate2D? pivot]) {
-    if (angle.degree == 0) return GeoCoordinate2D(x,y);
+    if (angle.degree == 0) return GeoCoordinate2D(x, y);
     // rotation matrix
     double mr1c1, mr1c2, mr2c1, mr2c2;
     mr1c1 = cos(angle.radian);
@@ -107,12 +106,12 @@ class GeoCoordinate2D extends GeoCoordinate {
 
     // adjust coordinate if we have a pivot point
     double cx, cy;
-    cx = pivot != null? x - pivot.x : x;
-    cy = pivot != null? y - pivot.y : y;
+    cx = pivot != null ? x - pivot.x : x;
+    cy = pivot != null ? y - pivot.y : y;
 
     // calculate new coordinates by multiplying matrix with adjusted coordinates
-    double newx = cx*mr1c1 + cy*mr1c2;
-    double newy = cx*mr2c1 + cy*mr2c2;
+    double newx = cx * mr1c1 + cy * mr1c2;
+    double newy = cx * mr2c1 + cy * mr2c2;
 
     if (pivot != null) {
       newx = newx + pivot.x;
@@ -126,20 +125,15 @@ class GeoCoordinate2D extends GeoCoordinate {
   /// an extrapolation factor `t`.
   GeoCoordinate2D lerpFrom2D(GeoCoordinate2D other, double t) {
     return GeoCoordinate2D(
-        lerpDouble(other.x, x, t)!,
-        lerpDouble(other.y, y, t)!
-    );
+        lerpDouble(other.x, x, t)!, lerpDouble(other.y, y, t)!);
   }
 
   /// Linearly interpolate from this coordinate to [other] coordinate by
   /// an extrapolation factor `t`.
   GeoCoordinate2D lerpTo2D(GeoCoordinate2D other, double t) {
     return GeoCoordinate2D(
-        lerpDouble(x, other.x, t)!,
-        lerpDouble(y, other.y, t)!
-    );
+        lerpDouble(x, other.x, t)!, lerpDouble(y, other.y, t)!);
   }
-
 
   /// Compare two coordinates for equality.
   @override
@@ -156,20 +150,19 @@ class GeoCoordinate2D extends GeoCoordinate {
   /// Calculate hashcode of 2-dimensional coordinate
   @override
   int get hashCode {
-    return x.hashCode ^ (y.hashCode*17);
+    return x.hashCode ^ (y.hashCode * 17);
   }
-
 }
-
 
 /// The [GeoAngle] class defines an angle that may be given in degrees or radians (but not both).
 /// It automatically converts angles to degrees and radians for easier access
 class GeoAngle {
-
   /// A static [GeoAngle] representing 0 degrees (0 radians).
   static final GeoAngle zero = GeoAngle(degree: 0);
+
   /// A static [GeoAngle] representing 180 degrees
   static final GeoAngle angle180 = GeoAngle(degree: 180);
+
   /// a static [GeoAngle] representing 360 degrees
   static final GeoAngle angle360 = GeoAngle(degree: 360);
 
@@ -180,7 +173,8 @@ class GeoAngle {
   late final double radian;
 
   /// Constructor for [GeoAngle].  Either degree or radians must be defined, but NOT both.
-  GeoAngle({double? degree, double? radian}) : assert((degree != null) ^ (radian != null)) {
+  GeoAngle({double? degree, double? radian})
+      : assert((degree != null) ^ (radian != null)) {
     if (degree != null) {
       this.degree = degree;
       this.radian = degree * pi / 180;
@@ -270,8 +264,6 @@ class GeoAngle {
 
   @override
   int get hashCode => radian.hashCode;
-
-
 }
 
 /// The [GeoEllipse] class defines an geometric ellipse with horizontal radius [xRadius], and vertical radius [yRadius].
@@ -282,7 +274,7 @@ class GeoEllipse {
 
   /// Creates a new instance of [GeoEllipse] with horizontal radius [xRadius], and vertical radius [yRadius]
   GeoEllipse(this.xRadius, this.yRadius) {
-    _xy =  xRadius * yRadius;
+    _xy = xRadius * yRadius;
   }
 
   /// An internal multiplier of x-radius and y-radius to expedite coordinate calculations at angles.
@@ -291,28 +283,35 @@ class GeoEllipse {
   /// Get coordinate on an ellipse centered at [center] at an [angle] given in radians.
   /// If center is not specified, origin (0,0) is assumed.
   /// Factor [factor] is multiplied with the amplitude at the angle to support polar charting
-  GeoCoordinate2D coordinateByRadian(double angle,[GeoCoordinate2D? center, double factor = 1.0]) {
+  GeoCoordinate2D coordinateByRadian(double angle,
+      [GeoCoordinate2D? center, double factor = 1.0]) {
     // calculate sin and cos of angle
     double sinr = sin(angle);
     double cosr = cos(angle);
     // calculate x and y positions in ellipse
     // x = +/- ( xradius * yradius * cos(angle) / sqrt( (yradius * cos(angle))^2 + (xradius * sin(angle))^2 )
     // y = +/- ( xradius * yradius * sin(angle) / sqrt( (yradius * cos(angle))^2 + (xradius * sin(angle))^2 )
-    double cx = factor * (_xy * cosr) / sqrt(pow(yRadius * cosr,2) + pow(xRadius*sinr,2));
-    double cy = factor * (_xy * sinr) / sqrt(pow(yRadius * cosr,2) + pow(xRadius*sinr,2));
-    return center == null? GeoCoordinate2D(cx,cy) : GeoCoordinate2D(center.x + cx, center.y + cy);
+    double cx = factor *
+        (_xy * cosr) /
+        sqrt(pow(yRadius * cosr, 2) + pow(xRadius * sinr, 2));
+    double cy = factor *
+        (_xy * sinr) /
+        sqrt(pow(yRadius * cosr, 2) + pow(xRadius * sinr, 2));
+    return center == null
+        ? GeoCoordinate2D(cx, cy)
+        : GeoCoordinate2D(center.x + cx, center.y + cy);
   }
 
   /// Get coordinate on an ellipse centered at [center] at an [angle] given in degrees.
   /// If center is not specified, origin (0,0) is assumed.
-  GeoCoordinate2D coordinateByDegree(double angle,[GeoCoordinate2D? center]) {
+  GeoCoordinate2D coordinateByDegree(double angle, [GeoCoordinate2D? center]) {
     return coordinateByRadian(GeoAngle.toRadian(angle), center);
   }
 
   /// Get coordinate on an ellipse centered at [center] at an [angle] given in [GeoAngle] (either radian or degree).
   /// If center is not specified, origin (0,0) is assumed.
-  GeoCoordinate2D coordinate(GeoAngle angle,[GeoCoordinate2D? center]) {
-    return coordinateByRadian(angle.radian,center);
+  GeoCoordinate2D coordinate(GeoAngle angle, [GeoCoordinate2D? center]) {
+    return coordinateByRadian(angle.radian, center);
   }
 
   /// String representation of [GeoEllipse] showing horizontal (x) radius, and vertical (y) radius.
@@ -320,7 +319,6 @@ class GeoEllipse {
   String toString() {
     return "Ellipse(xr:$xRadius, yr:$yRadius)";
   }
-
 }
 
 /// The [GeoCircle] class defines an geometric circle with [radius].
@@ -337,5 +335,4 @@ class GeoCircle extends GeoEllipse {
   String toString() {
     return "Circle(r:$radius)";
   }
-
 }
