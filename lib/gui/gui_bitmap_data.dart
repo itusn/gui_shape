@@ -62,16 +62,16 @@ class GuiBitmapBuffer {
   }
 
   /// Constant for 32-bit pixel w/ ARGB value
-  static const int BITS_PER_PIXEL_ARGB = 32;
+  static const int bitsPerPixelArgb = 32;
   /// Constant for 24-bit pixel w/ RGB value
-  static const int BITS_PER_PIXEL_RGB = 24;
+  static const int bitsPerPixelRgb = 24;
 
   /// Raw bitmap data
   Uint8List get imageData => _imageData;
 
   /// Create a bitmap buffer with header prepopulated with necessary data.  The actual image data
   /// must still be populated by the user.
-  GuiBitmapBuffer({required this.width, required this.height, this.bitsPerPixel = BITS_PER_PIXEL_ARGB}) {
+  GuiBitmapBuffer({required this.width, required this.height, this.bitsPerPixel = bitsPerPixelArgb}) {
     _prepareHeader();
   }
 

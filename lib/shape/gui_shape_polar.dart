@@ -6,7 +6,7 @@ import '../geo/geo.dart';
 import '../shape/i_gui_shape.dart';
 
 /// A callback function for calculating amplitude at an angle in a polar function
-typedef double GuiPolarFunction(GeoAngle angle);
+typedef GuiPolarFunction = double Function(GeoAngle angle);
 
 /// The [GuiShapePolar] class defines a polar graph's properties.
 class GuiShapePolar implements IGuiShape {

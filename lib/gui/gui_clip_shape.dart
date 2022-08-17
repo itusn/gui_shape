@@ -63,9 +63,9 @@ class GuiShapeShadowPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     if (boxShadows != null) {
       Path path = shape.getPath(size: size);
-      boxShadows!.forEach((GuiShadow shadow) {
+      for (GuiShadow shadow in boxShadows!) {
         canvas.drawShadow(path, shadow.color, shadow.elevation, false);
-      });
+      }
     }
   }
 

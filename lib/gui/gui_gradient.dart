@@ -85,8 +85,10 @@ class GuiNormalizeGradient {
     mapMinStop = mapStops.first;
     mapMaxStop = mapStops.last;
     // locate color map stop index for 0 and 1.0
-    for (mapStop0Idx = 0; (mapStop0Idx < mapStops.length) && (mapStops[mapStop0Idx] != 0); mapStop0Idx++);
-    for (mapStop1Idx = mapStops.length-1; (mapStop1Idx >= 0) && (mapStops[mapStop1Idx] != 1.0); mapStop1Idx--);
+    for (mapStop0Idx = 0; (mapStop0Idx < mapStops.length) && (mapStops[mapStop0Idx] != 0); mapStop0Idx++) {
+    }
+    for (mapStop1Idx = mapStops.length-1; (mapStop1Idx >= 0) && (mapStops[mapStop1Idx] != 1.0); mapStop1Idx--) {
+    }
 
     // condense gradient stops
     Set<double> gradStopsSet = <double>{};
@@ -105,8 +107,10 @@ class GuiNormalizeGradient {
     gradientMinStop = gradientStops.first;
     gradientMaxStop = gradientStops.last;
     // locate gradient stop index for 0 and 1.0
-    for (gradientStop0Idx = 0; (gradientStop0Idx < gradientStops.length) && (gradientStops[gradientStop0Idx] != 0); gradientStop0Idx++);
-    for (gradientStop1Idx = gradientStops.length-1; (gradientStop1Idx >= 0) && (gradientStops[gradientStop1Idx] != 1.0); gradientStop1Idx--);
+    for (gradientStop0Idx = 0; (gradientStop0Idx < gradientStops.length) && (gradientStops[gradientStop0Idx] != 0); gradientStop0Idx++) {
+    }
+    for (gradientStop1Idx = gradientStops.length-1; (gradientStop1Idx >= 0) && (gradientStops[gradientStop1Idx] != 1.0); gradientStop1Idx--) {
+    }
 
     // reset color map
     colormap.clear();
@@ -263,7 +267,7 @@ class GuiNormalizeGradient {
   /// as input parameters.  The output is a Flutter Image widget.
   Image createImage(int width, int height) {
     // prepare bitmap structure
-    GuiBitmapBuffer gbmp = GuiBitmapBuffer(width: width, height: height, bitsPerPixel: GuiBitmapBuffer.BITS_PER_PIXEL_ARGB);
+    GuiBitmapBuffer gbmp = GuiBitmapBuffer(width: width, height: height, bitsPerPixel: GuiBitmapBuffer.bitsPerPixelArgb);
     Uint8List data = gbmp.imageData;
     int offset = 0;
 

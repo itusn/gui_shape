@@ -1,8 +1,6 @@
 import 'dart:math';
 import 'dart:ui';
 
-import 'package:flutter/material.dart';
-
 /// The [GeoCoordinate] class defines (x,y,z) coordinates on a 3-dimensional space.
 class GeoCoordinate {
   /// The x-coordinate in a 3-dimensional space

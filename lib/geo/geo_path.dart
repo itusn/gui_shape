@@ -49,13 +49,13 @@ class GeoPath {
       if (mp2p1.isInfinite) mp2p1 = 0x80000000; // set to a large finite number, since we can't operate on infinity
       double mp2p3 = p2.slopeTo(p3);  // slope between point 3 and 2
       if (mp2p3.isInfinite) mp2p3 = 0x80000000; // set to a large finite number, since we can't operate on infinity
-      double mp2p1_mp2p3 = (mp2p1 * mp2p3);
+      double mp2p1xmp2p3 = (mp2p1 * mp2p3);
 
       // get angle between line P2P1 and Line P2P3 (ie. angle of P1-P2-P3)
       // if (mp2p1 * mp2p3)*k = -1*k then slopes are effectively perpendicular
       // we use k = 10000 so we can round the number and test for perpendicularity
-      bool isPerpendicular = ((mp2p1_mp2p3 * k).roundToDouble() == -k);
-      double angle123 = isPerpendicular ? (pi/2) : atan((mp2p1 - mp2p3) / (1 + mp2p1_mp2p3));
+      bool isPerpendicular = ((mp2p1xmp2p3 * k).roundToDouble() == -k);
+      double angle123 = isPerpendicular ? (pi/2) : atan((mp2p1 - mp2p3) / (1 + mp2p1xmp2p3));
 
       // calculate the length of the segment at which rounding the corner should start/end
       // tan (angle123 / 2) = cornerRadius / segment from p2 to p1

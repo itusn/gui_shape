@@ -50,7 +50,6 @@ class GeoUtility {
   /// Adjust coordinates [coords] within rectangle defined by dimensions [size] such that it meets [boxFit] criteria.
   /// If [bInPlace] is true, the [coords] array values will be updated, otherwise a new coordinate array will be returned.
   static List<GeoCoordinate2D> scaleToFit(Size size, BoxFit boxFit, List<GeoCoordinate2D> coords, [bool bRecenter = false, bool bInPlace = false]) {
-    GeoCoordinate2D center = GeoCoordinate2D(size.width,size.height);
     double sizeX = size.width / 2;
     double sizeY = size.height / 2;
     double minX = double.infinity, maxX = double.negativeInfinity, minY = double.infinity, maxY = double.negativeInfinity;
