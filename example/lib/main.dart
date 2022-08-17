@@ -649,7 +649,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // R1-C1. Regular Polygon Clip
+            // R1-C1. Polar Clip
             SizedBox(
               height: shapeSize.height,
               width: shapeSize.width,
@@ -678,7 +678,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            // R1-C2. Regular Polygon Border
+            // R1-C2. Polar Border
             SizedBox(
               height: shapeSize.height,
               width: shapeSize.width,
@@ -704,7 +704,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: const Icon(Icons.person, color: Colors.yellow),
               ),
             ),
-            // R1-C3. Fitted Polygon Border
+            // R1-C3. Fitted Polar Border
             SizedBox(
               height: shapeSize.height,
               width: shapeSize.width,
@@ -737,7 +737,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // R2-C1. Rounded Polygon Clip
+            // R2-C1. Rounded Polar Clip
             SizedBox(
               height: shapeSize.height,
               width: shapeSize.width,
@@ -764,7 +764,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            // R2-C2. Rounded Polygon Border
+            // R2-C2. Rounded Polar Border
             SizedBox(
               height: shapeSize.height,
               width: shapeSize.width,
@@ -790,7 +790,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: const Icon(Icons.person, color: Colors.yellow),
               ),
             ),
-            // R2-C3. Fitted Rounded Polygon Border
+            // R2-C3. Fitted Rounded Polar Border
             SizedBox(
               height: shapeSize.height,
               width: shapeSize.width,
@@ -823,7 +823,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // R3-C1. Rotated Rounded Polygon Clip
+            // R3-C1. Rotated Rounded Polar Clip
             SizedBox(
               height: shapeSize.height,
               width: shapeSize.width,
@@ -850,7 +850,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            // R3-C2. Rotated Rounded Polygon Border
+            // R3-C2. Rotated Rounded Polar Border
             SizedBox(
               height: shapeSize.height,
               width: shapeSize.width,
@@ -876,7 +876,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: const Icon(Icons.person, color: Colors.yellow),
               ),
             ),
-            // R3-C3. Rotated Fitted Rounded Polygon Border
+            // R3-C3. Rotated Fitted Rounded Polar Border
             SizedBox(
               height: shapeSize.height,
               width: shapeSize.width,

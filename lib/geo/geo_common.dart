@@ -167,7 +167,6 @@ class GeoCoordinate2D extends GeoCoordinate {
 class GeoAngle {
 
   /// A static [GeoAngle] representing 0 degrees (0 radians).
-  static final GeoAngle ZERO = GeoAngle(degree: 0);
   static final GeoAngle zero = GeoAngle(degree: 0);
   /// A static [GeoAngle] representing 180 degrees
   static final GeoAngle angle180 = GeoAngle(degree: 180);

@@ -55,7 +55,7 @@ Samples show n-sided polygons using **GuiClipShape**, and **GuiShapeBorder** wit
 
 ```dart
 	GuiClipShape(
-		shape: GuiShapePolygon(sides: 5, startAngle: GeoAngle.ZERO),
+		shape: GuiShapePolygon(sides: 5, startAngle: GeoAngle.zero),
 		child: Container(color: Colors.blue,),
 	)
 ````
@@ -66,7 +66,7 @@ Samples show n-sided polygons using **GuiClipShape**, and **GuiShapeBorder** wit
 	ElevatedButton(
 		style: ElevatedButton.styleFrom(
 			shape: GuiShapeBorder(
-				shape: GuiShapePolygon(sides: 5, startAngle: GeoAngle.ZERO),
+				shape: GuiShapePolygon(sides: 5, startAngle: GeoAngle.zero),
 				side: const BorderSide(color: Colors.purple,width: 2.0), 
 			),
 		),
@@ -139,7 +139,7 @@ Samples show n-pointed stars using **GuiClipShape**, and **GuiShapeBorder** with
 
 ```dart
 	GuiClipShape(
-		shape: GuiShapeStar(sides: 5,startAngle: GeoAngle.ZERO),
+		shape: GuiShapeStar(sides: 5,startAngle: GeoAngle.zero),
 		child: Container(color: Colors.blue)
 	)
 ````
@@ -150,7 +150,7 @@ Samples show n-pointed stars using **GuiClipShape**, and **GuiShapeBorder** with
 	ElevatedButton(
 		style: ElevatedButton.styleFrom(
 			shape: GuiShapeBorder(
-				shape: GuiShapeStar(sides: 5, startAngle: GeoAngle.ZERO),
+				shape: GuiShapeStar(sides: 5, startAngle: GeoAngle.zero),
 				side: const BorderSide(color: Colors.purple, width: 2.0)
 			),
 		),
@@ -326,7 +326,7 @@ Samples show a custom polygon using **GuiClipShape**, and **GuiShapeBorder** wit
 				GeoCoordinate2D( x5, y5 ),
 			],
 			cornerRadius: 8,
-			rotate: GeoAngle.ZERO,
+			rotate: GeoAngle.zero,
 			boxFit: BoxFit.fill,
 		),
 		shadows: [
@@ -357,7 +357,7 @@ Samples show a custom polygon using **GuiClipShape**, and **GuiShapeBorder** wit
 						GeoCoordinate2D( x5, y5 ),
 					],
 					cornerRadius: 8,
-					rotate: GeoAngle.ZERO,
+					rotate: GeoAngle.zero,
                     clockwise: true,
 					boxFit: BoxFit.fill,
 				),
@@ -482,8 +482,8 @@ Classes aid creating image buffers based on raw color pixel data.
 * List of classes
   * **GuiBitmapBuffer** - A class that prepares an image in BMP format, with BMP header populated.  The user can populate the bitmap image data and use the resulting array to either load the Image (via Image.memory(…)) or store the resulting BMP data into an I/O stream (ie. file, network, etc…
 
- ## Issues
+## Issues
  
- If you encounter any issues, please report them at [https://github.com/itusn/gui_shape/issues](https://github.com/itusn/gui_shape/issues).
+If you encounter any issues, please report them at [https://github.com/itusn/gui_shape/issues](https://github.com/itusn/gui_shape/issues).
  
  
