@@ -28,7 +28,7 @@ Add to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-	gui_shape: ^1.0.2
+	gui_shape: ^1.0.3
 ```
 
 ## Usage
