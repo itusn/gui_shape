@@ -1,6 +1,6 @@
 name: gui_shape
 description: A gui control library for creating polygons, stars, custom shapes, bitmaps, and 2D gradients
-version: 1.0.3
+version: 1.0.4
 homepage: https://github.com/itusn/gui_shape
 issue_tracker: https://github.com/itusn/gui_shape/issues
 
