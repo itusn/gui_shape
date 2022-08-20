@@ -22,5 +22,9 @@ Initial release contains:
 - No functional changes
 
 ## 1.0.3
-- Addressed dark static code analysis warnings
+- Addressed dart static code analysis warnings
 - Changed uppercase constants to lowercase
+
+## 1.0.4
+- Addressed minor code formatting warnnings
+
