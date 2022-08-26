@@ -29,3 +29,6 @@ export 'shape/gui_shape_polar.dart';
 
 // Shadow
 export 'gui/gui_shadow.dart';
+
+// Bitmap
+export 'gui/gui_bitmap_data.dart';

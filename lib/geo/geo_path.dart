@@ -37,7 +37,8 @@ class GeoPath {
     // COMMENTED: Radius used for Approach 2 (below)
     // Radius radius = Radius.circular(cornerRadius*5);
     for (int i = 0; i <= coords.length; i++) {
-      GeoCoordinate2D p1 = coords[(i + coords.length - 1) % coords.length]; // previous point
+      GeoCoordinate2D p1 =
+          coords[(i + coords.length - 1) % coords.length]; // previous point
       GeoCoordinate2D p2 = coords[i % coords.length]; // current point
       GeoCoordinate2D p3 = coords[(i + 1) % coords.length]; // next point
 

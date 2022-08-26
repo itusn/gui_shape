@@ -1,38 +1,38 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 
-/// The [GuiBitmapBuffer] class provides an interface for creating custom 24-bit or 32-bit bitmaps and flutter image
+/// The [GuiBitmapBuffer] class provides an interface for creating custom 24-bit or 32-bit bitmaps and flutter image.
+/// The structure of a Bitmap Buffer is defined below:
+/// Reference Documentation: https://en.wikipedia.org/wiki/BMP_file_format
+///
+/// bitmap file header : (14 bytes)
+/// WORD    bfType;               - [0-1] 'B' 'M'
+/// DWORD   bfSize;               - [2-5] Size of File (headers + data) - little endian
+/// WORD    bfReserved1;          - [6-7] 0 , 0
+/// WORD    bfReserved2;          - [8-9] 0 , 0
+/// DWORD   bfOffBits;            - [10-13] 54
+/// bitmap info header : (40 bytes)
+/// DWORD      biSize;            - [14-17] 40
+/// LONG       biWidth;           - [18-21] width of image
+/// LONG       biHeight;          - [22-25] height of image
+/// WORD       biPlanes;          - [26-27] # of planes = 1
+/// WORD       biBitCount;        - [28-29] # of bits per pixel
+/// DWORD      biCompression;     - [30-33]
+/// DWORD      biSizeImage;       - [34-37] size of bitmap image (# of pixels * bytes per pixel)
+/// LONG       biXPelsPerMeter;   - [38-41] the horizontal resolution of the image. (pixel per metre, signed integer) (200 dpi = 7874)
+/// LONG       biYPelsPerMeter;   - [42-45] the vertical resolution of the image. (pixel per metre, signed integer) (200 dpi = 7874)
+/// DWORD      biClrUsed;         - [46-49] the number of colors in the color palette, or 0 to default to 2n
+/// DWORD      biClrImportant;    - [50-53] the number of important colors used, or 0 when every color is important; generally ignored
+/// bitmap data : (size of bitmap image)
+/// BYTE  bdData                  - [...]
+/// data for image is ordered from bottom of image to top of image.
+///   Row N
+///   Row N-1
+///     ...
+///     ...
+///   Row 2
+///   Row 1
 class GuiBitmapBuffer {
-  /// The structure of a Bitmap Buffer is defined below:
-  /// Reference Documentation: https://en.wikipedia.org/wiki/BMP_file_format
-  /// bitmap file header : (14 bytes)
-  /// WORD    bfType;               // [0-1] 'B' 'M'
-  /// DWORD   bfSize;               // [2-5] Size of File (headers + data) - little endian
-  /// WORD    bfReserved1;          // [6-7] 0 , 0
-  /// WORD    bfReserved2;          // [8-9] 0 , 0
-  /// DWORD   bfOffBits;            // [10-13] 54
-  /// bitmap info header : (40 bytes)
-  /// DWORD      biSize;            // [14-17] 40
-  /// LONG       biWidth;           // [18-21] width of image
-  /// LONG       biHeight;          // [22-25] height of image
-  /// WORD       biPlanes;          // [26-27] # of planes = 1
-  /// WORD       biBitCount;        // [28-29] # of bits per pixel
-  /// DWORD      biCompression;     // [30-33]
-  /// DWORD      biSizeImage;       // [34-37] size of bitmap image (# of pixels * bytes per pixel)
-  /// LONG       biXPelsPerMeter;   // [38-41] the horizontal resolution of the image. (pixel per metre, signed integer) (200 dpi = 7874)
-  /// LONG       biYPelsPerMeter;   // [42-45] the vertical resolution of the image. (pixel per metre, signed integer) (200 dpi = 7874)
-  /// DWORD      biClrUsed;         // [46-49] the number of colors in the color palette, or 0 to default to 2n
-  /// DWORD      biClrImportant;    // [50-53] the number of important colors used, or 0 when every color is important; generally ignored
-  /// bitmap data : (size of bitmap image)
-  /// BYTE  bdData                  // [...]
-  /// data for image is ordered from bottom of image to top of image.
-  ///   Row N
-  ///   Row N-1
-  ///     ...
-  ///     ...
-  ///   Row 2
-  ///   Row 1
-
   /// Width of bitmap image in pixels
   final int width;
 
@@ -42,7 +42,7 @@ class GuiBitmapBuffer {
   /// Number of bits per pixel (ie. 24 for 24-bit RGB pixel, 32 for for ARGB pixel w/ transparency)
   final int bitsPerPixel;
 
-  /// # of bytes required to render a pixel (informational only)
+  /// Number of bytes required to render a pixel (informational only)
   int get bytesPerPixel => _bytesPerPixel;
 
   // data bits : ( width * height * bytes per pixel )
@@ -80,6 +80,7 @@ class GuiBitmapBuffer {
     _prepareHeader();
   }
 
+  /// create bitmap buffer and update header w/
   void _prepareHeader() {
     _bytesPerPixel = (bitsPerPixel + 7) ~/ 8; // # of bytes per pixel
     _bytesPerRow = ((bitsPerPixel * width) / 32).ceil() * 4;
@@ -115,6 +116,39 @@ class GuiBitmapBuffer {
     _imageData[39] = 0x1e;
     _imageData[42] = 0xc2;
     _imageData[43] = 0x1e;
+  }
+
+  /// Return color at position [column] (x), and [row] (y).  Both column and row are 0-based offset.
+  Color getColor(int column, int row) {
+    Color clr = Colors.transparent;
+    int offset = 54 +
+        ((height - row - 1) * _bytesPerRow) +
+        ((bitsPerPixel * column) ~/ 8);
+    if (bitsPerPixel == bitsPerPixelArgb) {
+      clr = new Color.fromARGB(_imageData[offset + 3], _imageData[offset + 2],
+          _imageData[offset + 1], _imageData[offset]);
+    } else if (bitsPerPixel == bitsPerPixelRgb) {
+      clr = new Color.fromARGB(255, _imageData[offset + 2],
+          _imageData[offset + 1], _imageData[offset]);
+    }
+    return clr;
+  }
+
+  /// Set color at position [column] (x), and [row] (y).  Both column and row are 0-based offset.
+  void setColor(int column, int row, Color color) {
+    int offset = 54 +
+        ((height - row - 1) * _bytesPerRow) +
+        ((bitsPerPixel * column) ~/ 8);
+    if (bitsPerPixel == bitsPerPixelArgb) {
+      _imageData[offset + 3] = color.alpha;
+      _imageData[offset + 2] = color.red;
+      _imageData[offset + 1] = color.green;
+      _imageData[offset] = color.blue;
+    } else if (bitsPerPixel == bitsPerPixelRgb) {
+      _imageData[offset + 2] = color.red;
+      _imageData[offset + 1] = color.green;
+      _imageData[offset] = color.blue;
+    }
   }
 
   /// Convert Bitmap buffer into a Flutter [Image] widget.
